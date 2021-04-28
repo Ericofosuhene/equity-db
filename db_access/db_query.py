@@ -30,7 +30,7 @@ class ReadDB:
         :param start: the start time frame for the time series data
         :param end: the end time for the time series data
         :param search_by: the field name of the identifier we passed in "assets"
-        :return: a AssetQuery object representing the object
+        :return: a AssetQuery object holding the query contents
         """
 
         if (not ts_fields) and (not static_fields):
@@ -64,4 +64,3 @@ class ReadDB:
 
         query_results = self.__api.read_from_db_agg('compustat', aggregation_query)
         return AssetQuery(aggregation_query_results=query_results, unique_identifiers=primary_key)
-
