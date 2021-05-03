@@ -126,3 +126,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/equity_db/testing/compustat.csv

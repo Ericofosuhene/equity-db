@@ -1,0 +1,683 @@
+static,type,description,name
+True,string,Standard and Poor's Identifier (GVKEY),gvkey
+True,string,Security-level Identifier (LIID),liid
+True,date,First Effective Date of Link (LINKDT),linkdt
+True,date,Last Effective Date of Link (LINKENDDT),linkenddt
+True,string,Primary Link Marker (LINKPRIM),linkprim
+True,string,Link Type Code (LINKTYPE),linktype
+True,double,Historical CRSP PERMCO Link to COMPUSTAT Record (LPERMCO),lpermco
+True,double,Historical CRSP PERMNO Link to COMPUSTAT Record (LPERMNO),lpermno
+True,string,Company Name (CONM),conm
+True,string,Ticker Symbol (TIC),tic
+True,string,CUSIP (CUSIP),cusip
+True,string,CIK Number (CIK),cik
+True,double,Stock Exchange Code (EXCHG),exchg
+True,double,Fiscal Year-End (FYR),fyr
+True,string,Foreign Incorporation Code (FIC),fic
+True,string,ADD1 -- Address Line 1 (ADD1),add1
+True,string,ADD2 -- Address Line 2 (ADD2),add2
+True,string,ADD3 -- Address Line 3 (ADD3),add3
+True,string,ADD4 -- Address Line 4 (ADD4),add4
+True,string,ADDZIP -- Postal Code (ADDZIP),addzip
+True,string,BUSDESC -- S&P Business Description (BUSDESC),busdesc
+True,string,CITY -- City (CITY),city
+True,string,CONML -- Company Legal Name (CONML),conml
+True,string,COUNTY -- County Code (COUNTY),county
+True,string,DLRSN -- Research Co Reason for Deletion (DLRSN),dlrsn
+True,string,EIN -- Employer Identification Number (EIN),ein
+True,string,FAX -- Fax Number (FAX),fax
+True,double,FYRC -- Current Fiscal Year End Month (FYRC),fyrc
+True,double,GGROUP -- GIC Groups (GGROUP),ggroup
+True,string,GIND -- GIC Industries (GIND),gind
+True,double,GSECTOR -- GIC Sectors (GSECTOR),gsector
+True,double,GSUBIND -- GIC Sub-Industries (GSUBIND),gsubind
+True,string,"IDBFLAG -- International, Domestic, Both Indicator (IDBFLAG)",idbflag
+True,string,INCORP -- Current State/Province of Incorporation Code (INCORP),incorp
+True,string,LOC -- Current ISO Country Code - Headquarters (LOC),loc
+True,string,NAICS -- North American Industry Classification Code (NAICS),naics
+True,string,PHONE -- Phone Number (PHONE),phone
+True,string,PRICAN -- Current Primary Issue Tag - Canada (PRICAN),prican
+True,string,PRIROW -- Primary Issue Tag - Rest of World (PRIROW),prirow
+True,string,PRIUSA -- Current Primary Issue Tag - US (PRIUSA),priusa
+True,string,SIC -- Standard Industry Classification Code (SIC),sic
+True,double,SPCINDCD -- S&P Industry Sector Code (SPCINDCD),spcindcd
+True,double,SPCSECCD -- S&P Economic Sector Code (SPCSECCD),spcseccd
+True,string,SPCSRC -- S&P Quality Ranking - Current (SPCSRC),spcsrc
+True,string,STATE -- State/Province (STATE),state
+True,double,STKO -- Stock Ownership Code (STKO),stko
+True,string,WEBURL -- Web URL (WEBURL),weburl
+True,date,DLDTE -- Research Company Deletion Date (DLDTE),dldte
+True,date,IPODATE -- Company Initial Public Offering Date (IPODATE),ipodate
+True,string,ACCTCHGQ -- Adoption of Accounting Changes (ACCTCHGQ),acctchgq
+True,string,ACCTSTDQ -- Accounting Standard (ACCTSTDQ),acctstdq
+False,double,ADRRQ -- ADR Ratio (ADRRQ),adrrq
+False,double,AJEXQ -- Adjustment Factor (Company) - Cumulative by Ex-Date (AJEXQ),ajexq
+False,double,AJPQ -- Adjustment Factor (Company) - Cumulative byPay-Date (AJPQ),ajpq
+False,date,APDEDATEQ -- Actual Period End date (APDEDATEQ),apdedateq
+False,string,BSPRQ -- Balance Sheet Presentation (BSPRQ),bsprq
+False,string,COMPSTQ -- Comparability Status (COMPSTQ),compstq
+False,string,CURNCDQ -- Native Currency Code (CURNCDQ),curncdq
+False,double,CURRTRQ -- Currency Translation Rate (CURRTRQ),currtrq
+False,double,CURUSCNQ -- US Canadian Translation Rate - Interim (CURUSCNQ),curuscnq
+False,string,DATACQTR -- Calendar Data Year and Quarter (DATACQTR),datacqtr
+False,string,DATAFQTR -- Fiscal Data Year and Quarter (DATAFQTR),datafqtr
+False,date,FDATEQ -- Final Date (FDATEQ),fdateq
+False,string,FINALQ -- Final Indicator Flag (FINALQ),finalq
+False,double,FQTR -- Fiscal Quarter (FQTR),fqtr
+False,double,FYEARQ -- Fiscal Year (FYEARQ),fyearq
+False,string,OGMQ -- OIL & GAS METHOD (OGMQ),ogmq
+False,date,PDATEQ -- Preliminary Date (PDATEQ),pdateq
+False,date,RDQ -- Report Date of Quarterly Earnings (RDQ),rdq
+False,string,RP -- Reporting Periodicity (RP),rp
+False,double,SCFQ -- Cash Flow Model (SCFQ),scfq
+False,double,SRCQ -- Source Code (SRCQ),srcq
+False,string,STALTQ -- Status Alert (STALTQ),staltq
+False,double,UPDQ -- Update Code (UPDQ),updq
+False,double,ACCHGQ -- Accounting Changes - Cumulative Effect (ACCHGQ),acchgq
+False,double,ACOMINCQ -- Accumulated Other Comprehensive Income (Loss) (ACOMINCQ),acomincq
+False,double,ACOQ -- Current Assets - Other - Total (ACOQ),acoq
+False,double,ACTQ -- Current Assets - Total (ACTQ),actq
+False,double,ALTOQ -- Other Long-term Assets (ALTOQ),altoq
+False,double,ANCQ -- Non-Current Assets - Total (ANCQ),ancq
+False,double,ANOQ -- Assets Netting & Other Adjustments (ANOQ),anoq
+False,double,AOCIDERGLQ -- Accum Other Comp Inc - Derivatives Unrealized Gain/Loss (AOCIDERGLQ),aociderglq
+False,double,AOCIOTHERQ -- Accum Other Comp Inc - Other Adjustments (AOCIOTHERQ),aociotherq
+False,double,AOCIPENQ -- Accum Other Comp Inc - Min Pension Liab Adj (AOCIPENQ),aocipenq
+False,double,AOCISECGLQ -- Accum Other Comp Inc - Unreal G/L Ret Int in Sec Assets (AOCISECGLQ),aocisecglq
+False,double,AOL2Q -- Assets Level2 (Observable) (AOL2Q),aol2q
+False,double,AOQ -- Assets - Other - Total (AOQ),aoq
+False,double,APQ -- Account Payable/Creditors - Trade (APQ),apq
+False,double,AQAQ -- Acquisition/Merger After-Tax (AQAQ),aqaq
+False,double,AQDQ -- Acquisition/Merger Diluted EPS Effect (AQDQ),aqdq
+False,double,AQEPSQ -- Acquisition/Merger Basic EPS Effect (AQEPSQ),aqepsq
+False,double,AQPL1Q -- Assets Level1 (Quoted Prices) (AQPL1Q),aqpl1q
+False,double,AQPQ -- Acquisition/Merger Pretax (AQPQ),aqpq
+False,double,ARCEDQ -- As Reported Core - Diluted EPS Effect (ARCEDQ),arcedq
+False,double,ARCEEPSQ -- As Reported Core - Basic EPS Effect (ARCEEPSQ),arceepsq
+False,double,ARCEQ -- As Reported Core - After-tax (ARCEQ),arceq
+False,double,ATQ -- Assets - Total (ATQ),atq
+False,double,AUL3Q -- Assets Level3 (Unobservable) (AUL3Q),aul3q
+False,double,BILLEXCEQ -- Billings in Excess of Cost & Earnings (BILLEXCEQ),billexceq
+False,double,CAPR1Q -- Risk-Adjusted Capital Ratio - Tier 1 (CAPR1Q),capr1q
+False,double,CAPR2Q -- Risk-Adjusted Capital Ratio - Tier 2 (CAPR2Q),capr2q
+False,double,CAPR3Q -- Risk-Adjusted Capital Ratio - Combined (CAPR3Q),capr3q
+False,double,CAPSFTQ -- Capitalized Software (CAPSFTQ),capsftq
+False,double,CAPSQ -- Capital Surplus/Share Premium Reserve (CAPSQ),capsq
+False,double,CEIEXBILLQ -- Cost & Earnings in Excess of Billings (CEIEXBILLQ),ceiexbillq
+False,double,CEQQ -- Common/Ordinary Equity - Total (CEQQ),ceqq
+False,double,CHEQ -- Cash and Short-Term Investments (CHEQ),cheq
+False,double,CHQ -- Cash (CHQ),chq
+False,double,CIBEGNIQ -- Comp Inc - Beginning Net Income (CIBEGNIQ),cibegniq
+False,double,CICURRQ -- Comp Inc - Currency Trans Adj (CICURRQ),cicurrq
+False,double,CIDERGLQ -- Comp Inc - Derivative Gains/Losses (CIDERGLQ),ciderglq
+False,double,CIMIIQ -- Comprehensive Income - Noncontrolling Interest (CIMIIQ),cimiiq
+False,double,CIOTHERQ -- Comp Inc - Other Adj (CIOTHERQ),ciotherq
+False,double,CIPENQ -- Comp Inc - Minimum Pension Adj (CIPENQ),cipenq
+False,double,CIQ -- Comprehensive Income - Total (CIQ),ciq
+False,double,CISECGLQ -- Comp Inc - Securities Gains/Losses (CISECGLQ),cisecglq
+False,double,CITOTALQ -- Comprehensive Income - Parent (CITOTALQ),citotalq
+False,double,COGSQ -- Cost of Goods Sold (COGSQ),cogsq
+False,double,CSH12Q -- Common Shares Used to Calculate Earnings Per Share - 12 Months Moving (CSH12Q),csh12q
+False,double,CSHFD12 -- Common Shares Used to Calc Earnings Per Share - Fully Diluted - 12 Months M (CSHFD12),cshfd12
+False,double,CSHFDQ -- Com Shares for Diluted EPS (CSHFDQ),cshfdq
+False,double,CSHIQ -- Common Shares Issued (CSHIQ),cshiq
+False,double,CSHOPQ -- Total Shares Repurchased - Quarter (CSHOPQ),cshopq
+False,double,CSHOQ -- Common Shares Outstanding (CSHOQ),cshoq
+False,double,CSHPRQ -- Common Shares Used to Calculate Earnings Per Share - Basic (CSHPRQ),cshprq
+False,double,CSTKCVQ -- Carrying Value (CSTKCVQ),cstkcvq
+False,double,CSTKEQ -- Common Stock Equivalents - Dollar Savings (CSTKEQ),cstkeq
+False,double,CSTKQ -- Common/Ordinary Stock (Capital) (CSTKQ),cstkq
+False,double,DCOMQ -- Deferred Compensation (DCOMQ),dcomq
+False,double,DD1Q -- Long-Term Debt Due in One Year (DD1Q),dd1q
+False,double,DERACQ -- Derivative Assets - Current (DERACQ),deracq
+False,double,DERALTQ -- Derivative Assets Long-Term (DERALTQ),deraltq
+False,double,DERHEDGLQ -- Gains/Losses on Derivatives and Hedging (DERHEDGLQ),derhedglq
+False,double,DERLCQ -- Derivative Liabilities- Current (DERLCQ),derlcq
+False,double,DERLLTQ -- Derivative Liabilities Long-Term (DERLLTQ),derlltq
+False,double,DILADQ -- Dilution Adjustment (DILADQ),diladq
+False,double,DILAVQ -- Dilution Available - Excluding Extraordinary Items (DILAVQ),dilavq
+False,double,DLCQ -- Debt in Current Liabilities (DLCQ),dlcq
+False,double,DLTTQ -- Long-Term Debt - Total (DLTTQ),dlttq
+False,double,DOQ -- Discontinued Operations (DOQ),doq
+False,double,DPACREQ -- Accumulated Depreciation of RE Property (DPACREQ),dpacreq
+False,double,"DPACTQ -- Depreciation, Depletion and Amortization (Accumulated) (DPACTQ)",dpactq
+False,double,DPQ -- Depreciation and Amortization - Total (DPQ),dpq
+False,double,DPRETQ -- Depr/Amort of Property (DPRETQ),dpretq
+False,double,DRCQ -- Deferred Revenue - Current (DRCQ),drcq
+False,double,DRLTQ -- Deferred Revenue - Long-term (DRLTQ),drltq
+False,double,DTEAQ -- Extinguishment of Debt After-tax (DTEAQ),dteaq
+False,double,DTEDQ -- Extinguishment of Debt Diluted EPS Effect (DTEDQ),dtedq
+False,double,DTEEPSQ -- Extinguishment of Debt Basic EPS Effect (DTEEPSQ),dteepsq
+False,double,DTEPQ -- Extinguishment of Debt Pretax (DTEPQ),dtepq
+False,double,DVINTFQ -- Dividends & Interest Receivable (Cash Flow) (DVINTFQ),dvintfq
+False,double,DVPQ -- Dividends - Preferred/Preference (DVPQ),dvpq
+False,double,EPSF12 -- Earnings Per Share (Diluted) - Excluding Extraordinary Items - 12 Months Mo (EPSF12),epsf12
+False,double,EPSFI12 -- Earnings Per Share (Diluted) - Including Extraordinary Items (EPSFI12),epsfi12
+False,double,EPSFIQ -- Earnings Per Share (Diluted) - Including Extraordinary Items (EPSFIQ),epsfiq
+False,double,EPSFXQ -- Earnings Per Share (Diluted) - Excluding Extraordinary items (EPSFXQ),epsfxq
+False,double,EPSPI12 -- Earnings Per Share (Basic) - Including Extraordinary Items - 12 Months Movi (EPSPI12),epspi12
+False,double,EPSPIQ -- Earnings Per Share (Basic) - Including Extraordinary Items (EPSPIQ),epspiq
+False,double,EPSPXQ -- Earnings Per Share (Basic) - Excluding Extraordinary Items (EPSPXQ),epspxq
+False,double,EPSX12 -- Earnings Per Share (Basic) - Excluding Extraordinary Items - 12 Months Movi (EPSX12),epsx12
+False,double,ESOPCTQ -- Common ESOP Obligation - Total (ESOPCTQ),esopctq
+False,double,ESOPNRQ -- Preferred ESOP Obligation - Non-Redeemable (ESOPNRQ),esopnrq
+False,double,ESOPRQ -- Preferred ESOP Obligation - Redeemable (ESOPRQ),esoprq
+False,double,ESOPTQ -- Preferred ESOP Obligation - Total (ESOPTQ),esoptq
+False,double,ESUBQ -- Equity in Earnings (I/S) - Unconsolidated Subsidiaries (ESUBQ),esubq
+False,double,FCAQ -- Foreign Exchange Income (Loss) (FCAQ),fcaq
+False,double,FFOQ -- Funds From Operations (REIT) (FFOQ),ffoq
+False,double,"FINACOQ -- Finance Division Other Current Assets, Total (FINACOQ)",finacoq
+False,double,"FINAOQ -- Finance Division Other Long-Term Assets, Total (FINAOQ)",finaoq
+False,double,FINCHQ -- Finance Division - Cash (FINCHQ),finchq
+False,double,FINDLCQ -- Finance Division Long-Term Debt - Current (FINDLCQ),findlcq
+False,double,FINDLTQ -- Finance Division Debt - Long-Term (FINDLTQ),findltq
+False,double,FINIVSTQ -- Finance Division - Short-Term Investments (FINIVSTQ),finivstq
+False,double,"FINLCOQ -- Finance Division Other Current Liabilities, Total (FINLCOQ)",finlcoq
+False,double,"FINLTOQ -- Finance Division Other Long Term Liabilities, Total (FINLTOQ)",finltoq
+False,double,FINNPQ -- Finance Division Notes Payable (FINNPQ),finnpq
+False,double,FINRECCQ -- Finance Division - Current Receivables (FINRECCQ),finreccq
+False,double,FINRECLTQ -- Finance Division - Long-Term Receivables (FINRECLTQ),finrecltq
+False,double,FINREVQ -- Finance Division Revenue (FINREVQ),finrevq
+False,double,FINXINTQ -- Finance Division Interest Expense (FINXINTQ),finxintq
+False,double,FINXOPRQ -- Finance Division Operating Expense (FINXOPRQ),finxoprq
+False,double,FYR -- Fiscal Year-end Month (FYR),fyr
+False,double,GDWLAMQ -- Amortization of Goodwill (GDWLAMQ),gdwlamq
+False,double,GDWLIA12 -- Impairments of Goodwill AfterTax - 12mm (GDWLIA12),gdwlia12
+False,double,GDWLIAQ -- Impairment of Goodwill After-tax (GDWLIAQ),gdwliaq
+False,double,GDWLID12 -- Impairments Diluted EPS - 12mm (GDWLID12),gdwlid12
+False,double,GDWLIDQ -- Impairment of Goodwill Diluted EPS Effect (GDWLIDQ),gdwlidq
+False,double,GDWLIEPS12 -- Impairment of Goodwill Basic EPS Effect 12MM (GDWLIEPS12),gdwlieps12
+False,double,GDWLIEPSQ -- Impairment of Goodwill Basic EPS Effect (GDWLIEPSQ),gdwliepsq
+False,double,GDWLIPQ -- Impairment of Goodwill Pretax (GDWLIPQ),gdwlipq
+False,double,GDWLQ -- Goodwill (net) (GDWLQ),gdwlq
+False,double,GLAQ -- Gain/Loss After-Tax (GLAQ),glaq
+False,double,GLCEA12 -- Gain/Loss on Sale (Core Earnings Adjusted) After-tax 12MM (GLCEA12),glcea12
+False,double,GLCEAQ -- Gain/Loss on Sale (Core Earnings Adjusted) After-tax (GLCEAQ),glceaq
+False,double,GLCED12 -- Gain/Loss on Sale (Core Earnings Adjusted) Diluted EPS Effect 12MM (GLCED12),glced12
+False,double,GLCEDQ -- Gain/Loss on Sale (Core Earnings Adjusted) Diluted EPS (GLCEDQ),glcedq
+False,double,GLCEEPS12 -- Gain/Loss on Sale (Core Earnings Adjusted) Basic EPS Effect 12MM (GLCEEPS12),glceeps12
+False,double,GLCEEPSQ -- Gain/Loss on Sale (Core Earnings Adjusted) Basic EPS Effect (GLCEEPSQ),glceepsq
+False,double,GLCEPQ -- Gain/Loss on Sale (Core Earnings Adjusted) Pretax (GLCEPQ),glcepq
+False,double,GLDQ -- Gain/Loss Diluted EPS Effect (GLDQ),gldq
+False,double,GLEPSQ -- Gain/Loss Basic EPS Effect (GLEPSQ),glepsq
+False,double,GLIVQ -- Gains/Losses on investments (GLIVQ),glivq
+False,double,GLPQ -- Gain/Loss Pretax (GLPQ),glpq
+False,double,HEDGEGLQ -- Gain/Loss on Ineffective Hedges (HEDGEGLQ),hedgeglq
+False,double,IBADJ12 -- Income Before Extra Items - Adj for Common Stock Equivalents - 12MM (IBADJ12),ibadj12
+False,double,IBADJQ -- Income Before Extraordinary Items - Adjusted for Common Stock Equivalents (IBADJQ),ibadjq
+False,double,IBCOMQ -- Income Before Extraordinary Items - Available for Common (IBCOMQ),ibcomq
+False,double,IBMIIQ -- Income before Extraordinary Items and Noncontrolling Interests (IBMIIQ),ibmiiq
+False,double,IBQ -- Income Before Extraordinary Items (IBQ),ibq
+False,double,ICAPTQ -- Invested Capital - Total - Quarterly (ICAPTQ),icaptq
+False,double,INTACCQ -- Interest Accrued (INTACCQ),intaccq
+False,double,INTANOQ -- Other Intangibles (INTANOQ),intanoq
+False,double,INTANQ -- Intangible Assets - Total (INTANQ),intanq
+False,double,INVFGQ -- Inventory - Finished Goods (INVFGQ),invfgq
+False,double,INVOQ -- Inventory - Other (INVOQ),invoq
+False,double,INVRMQ -- Inventory - Raw Materials (INVRMQ),invrmq
+False,double,INVTQ -- Inventories - Total (INVTQ),invtq
+False,double,INVWIPQ -- Inventory - Work in Process (INVWIPQ),invwipq
+False,double,IVAEQQ -- Investment and Advances - Equity (IVAEQQ),ivaeqq
+False,double,IVAOQ -- Investment and Advances - Other (IVAOQ),ivaoq
+False,double,IVLTQ -- Total Long-term Investments (IVLTQ),ivltq
+False,double,IVSTQ -- Short-Term Investments- Total (IVSTQ),ivstq
+False,double,LCOQ -- Current Liabilities - Other - Total (LCOQ),lcoq
+False,double,LCTQ -- Current Liabilities - Total (LCTQ),lctq
+False,double,LLTQ -- Long-Term Liabilities (Total) (LLTQ),lltq
+False,double,LNOQ -- Liabilities Netting & Other Adjustments (LNOQ),lnoq
+False,double,LOL2Q -- Liabilities Level2 (Observable) (LOL2Q),lol2q
+False,double,LOQ -- Liabilities - Other (LOQ),loq
+False,double,LOXDRQ -- Liabilities - Other - Excluding Deferred Revenue (LOXDRQ),loxdrq
+False,double,LQPL1Q -- Liabilities Level1 (Quoted Prices) (LQPL1Q),lqpl1q
+False,double,LSEQ -- Liabilities and Stockholders Equity - Total (LSEQ),lseq
+False,double,LTMIBQ -- Liabilities - Total and Noncontrolling Interest (LTMIBQ),ltmibq
+False,double,LTQ -- Liabilities - Total (LTQ),ltq
+False,double,LUL3Q -- Liabilities Level3 (Unobservable) (LUL3Q),lul3q
+False,double,MIBNQ -- Noncontrolling Interests - Nonredeemable - Balance Sheet (MIBNQ),mibnq
+False,double,MIBQ -- Noncontrolling Interest - Redeemable - Balance Sheet (MIBQ),mibq
+False,double,MIBTQ -- Noncontrolling Interests - Total - Balance Sheet (MIBTQ),mibtq
+False,double,MIIQ -- Noncontrolling Interest - Income Account (MIIQ),miiq
+False,double,MSAQ -- Accum Other Comp Inc - Marketable Security Adjustments (MSAQ),msaq
+False,double,NCOQ -- Net Charge-Offs (NCOQ),ncoq
+False,double,NIITQ -- Net Interest Income (Tax Equivalent) (NIITQ),niitq
+False,double,NIMQ -- Net Interest Margin (NIMQ),nimq
+False,double,NIQ -- Net Income (Loss) (NIQ),niq
+False,double,NOPIQ -- Non-Operating Income (Expense) - Total (NOPIQ),nopiq
+False,double,NPATQ -- Nonperforming Assets - Total (NPATQ),npatq
+False,double,NPQ -- Notes Payable (NPQ),npq
+False,double,NRTXTDQ -- Nonrecurring Income Taxes Diluted EPS Effect (NRTXTDQ),nrtxtdq
+False,double,NRTXTEPSQ -- Nonrecurring Income Taxes Basic EPS Effect (NRTXTEPSQ),nrtxtepsq
+False,double,NRTXTQ -- Nonrecurring Income Taxes - After-tax (NRTXTQ),nrtxtq
+False,double,OBKQ -- Order backlog (OBKQ),obkq
+False,double,OEPF12 -- Earnings Per Share - Diluted - from Operations - 12MM (OEPF12),oepf12
+False,double,OEPS12 -- Earnings Per Share from Operations - 12 Months Moving (OEPS12),oeps12
+False,double,OEPSXQ -- Earnings Per Share - Diluted - from Operations (OEPSXQ),oepsxq
+False,double,OIADPQ -- Operating Income After Depreciation - Quarterly (OIADPQ),oiadpq
+False,double,OIBDPQ -- Operating Income Before Depreciation - Quarterly (OIBDPQ),oibdpq
+False,double,OPEPSQ -- Earnings Per Share from Operations (OPEPSQ),opepsq
+False,double,OPTDRQ -- Dividend Rate - Assumption (%) (OPTDRQ),optdrq
+False,double,OPTFVGRQ -- Options - Fair Value of Options Granted (OPTFVGRQ),optfvgrq
+False,double,OPTLIFEQ -- Life of Options - Assumption (# yrs) (OPTLIFEQ),optlifeq
+False,double,OPTRFRQ -- Risk Free Rate - Assumption (%) (OPTRFRQ),optrfrq
+False,double,OPTVOLQ -- Volatility - Assumption (%) (OPTVOLQ),optvolq
+False,double,PIQ -- Pretax Income (PIQ),piq
+False,double,PLLQ -- Provision for Loan/Asset Losses (PLLQ),pllq
+False,double,PNC12 -- Pension Core Adjustment - 12mm (PNC12),pnc12
+False,double,PNCD12 -- Core Pension Adjustment Diluted EPS Effect 12MM (PNCD12),pncd12
+False,double,PNCDQ -- Core Pension Adjustment Diluted EPS Effect (PNCDQ),pncdq
+False,double,PNCEPS12 -- Core Pension Adjustment Basic EPS Effect 12MM (PNCEPS12),pnceps12
+False,double,PNCEPSQ -- Core Pension Adjustment Basic EPS Effect (PNCEPSQ),pncepsq
+False,double,PNCIAPQ -- Core Pension Interest Adjustment After-tax Preliminary (PNCIAPQ),pnciapq
+False,double,PNCIAQ -- Core Pension Interest Adjustment After-tax (PNCIAQ),pnciaq
+False,double,PNCIDPQ -- Core Pension Interest Adjustment Diluted EPS Effect Preliminary (PNCIDPQ),pncidpq
+False,double,PNCIDQ -- Core Pension Interest Adjustment Diluted EPS Effect (PNCIDQ),pncidq
+False,double,PNCIEPSPQ -- Core Pension Interest Adjustment Basic EPS Effect Preliminary (PNCIEPSPQ),pnciepspq
+False,double,PNCIEPSQ -- Core Pension Interest Adjustment Basic EPS Effect (PNCIEPSQ),pnciepsq
+False,double,PNCIPPQ -- Core Pension Interest Adjustment Pretax Preliminary (PNCIPPQ),pncippq
+False,double,PNCIPQ -- Core Pension Interest Adjustment Pretax (PNCIPQ),pncipq
+False,double,PNCPD12 -- Core Pension Adjustment 12MM Diluted EPS Effect Preliminary (PNCPD12),pncpd12
+False,double,PNCPDQ -- Core Pension Adjustment Diluted EPS Effect Preliminary (PNCPDQ),pncpdq
+False,double,PNCPEPS12 -- Core Pension Adjustment 12MM Basic EPS Effect Preliminary (PNCPEPS12),pncpeps12
+False,double,PNCPEPSQ -- Core Pension Adjustment Basic EPS Effect Preliminary (PNCPEPSQ),pncpepsq
+False,double,PNCPQ -- Core Pension Adjustment Preliminary (PNCPQ),pncpq
+False,double,PNCQ -- Core Pension Adjustment (PNCQ),pncq
+False,double,PNCWIAPQ -- Core Pension w/o Interest Adjustment After-tax Preliminary (PNCWIAPQ),pncwiapq
+False,double,PNCWIAQ -- Core Pension w/o Interest Adjustment After-tax (PNCWIAQ),pncwiaq
+False,double,PNCWIDPQ -- Core Pension w/o Interest Adjustment Diluted EPS Effect Preliminary (PNCWIDPQ),pncwidpq
+False,double,PNCWIDQ -- Core Pension w/o Interest Adjustment Diluted EPS Effect (PNCWIDQ),pncwidq
+False,double,PNCWIEPQ -- Core Pension w/o Interest Adjustment Basic EPS Effect Preliminary (PNCWIEPQ),pncwiepq
+False,double,PNCWIEPSQ -- Core Pension w/o Interest Adjustment Basic EPS Effect (PNCWIEPSQ),pncwiepsq
+False,double,PNCWIPPQ -- Core Pension w/o Interest Adjustment Pretax Preliminary (PNCWIPPQ),pncwippq
+False,double,PNCWIPQ -- Core Pension w/o Interest Adjustment Pretax (PNCWIPQ),pncwipq
+False,double,PNRSHOQ -- Nonred Pfd Shares Outs (000) - Quarterly (PNRSHOQ),pnrshoq
+False,double,"PPEGTQ -- Property, Plant and Equipment - Total (Gross) - Quarterly (PPEGTQ)",ppegtq
+False,double,PPENTQ -- Property Plant and Equipment - Total (Net) (PPENTQ),ppentq
+False,double,PRCAQ -- Core Post Retirement Adjustment (PRCAQ),prcaq
+False,double,PRCD12 -- Core Post Retirement Adjustment Diluted EPS Effect 12MM (PRCD12),prcd12
+False,double,PRCDQ -- Core Post Retirement Adjustment Diluted EPS Effect (PRCDQ),prcdq
+False,double,PRCE12 -- Core Post Retirement Adjustment 12MM (PRCE12),prce12
+False,double,PRCEPS12 -- Core Post Retirement Adjustment Basic EPS Effect 12MM (PRCEPS12),prceps12
+False,double,PRCEPSQ -- Core Post Retirement Adjustment Basic EPS Effect (PRCEPSQ),prcepsq
+False,double,PRCPD12 -- Core Post Retirement Adjustment 12MM Diluted EPS Effect Preliminary (PRCPD12),prcpd12
+False,double,PRCPDQ -- Core Post Retirement Adjustment Diluted EPS Effect Preliminary (PRCPDQ),prcpdq
+False,double,PRCPEPS12 -- Core Post Retirement Adjustment 12MM Basic EPS Effect Preliminary (PRCPEPS12),prcpeps12
+False,double,PRCPEPSQ -- Core Post Retirement Adjustment Basic EPS Effect Preliminary (PRCPEPSQ),prcpepsq
+False,double,PRCPQ -- Core Post Retirement Adjustment Preliminary (PRCPQ),prcpq
+False,double,PRCRAQ -- Repurchase Price - Average per share Quarter (PRCRAQ),prcraq
+False,double,PRSHOQ -- Redeem Pfd Shares Outs (000) (PRSHOQ),prshoq
+False,double,PSTKNQ -- Preferred/Preference Stock - Nonredeemable (PSTKNQ),pstknq
+False,double,PSTKQ -- Preferred/Preference Stock (Capital) - Total (PSTKQ),pstkq
+False,double,PSTKRQ -- Preferred/Preference Stock - Redeemable (PSTKRQ),pstkrq
+False,double,RCAQ -- Restructuring Cost After-tax (RCAQ),rcaq
+False,double,RCDQ -- Restructuring Cost Diluted EPS Effect (RCDQ),rcdq
+False,double,RCEPSQ -- Restructuring Cost Basic EPS Effect (RCEPSQ),rcepsq
+False,double,RCPQ -- Restructuring Cost Pretax (RCPQ),rcpq
+False,double,RDIPAQ -- In Process R&D Expense After-tax (RDIPAQ),rdipaq
+False,double,RDIPDQ -- In Process R&D Expense Diluted EPS Effect (RDIPDQ),rdipdq
+False,double,RDIPEPSQ -- In Process R&D Expense Basic EPS Effect (RDIPEPSQ),rdipepsq
+False,double,RDIPQ -- In Process R&D (RDIPQ),rdipq
+False,double,RECDQ -- Receivables - Estimated Doubtful (RECDQ),recdq
+False,double,RECTAQ -- Accum Other Comp Inc - Cumulative Translation Adjustments (RECTAQ),rectaq
+False,double,RECTOQ -- Receivables - Current Other incl Tax Refunds (RECTOQ),rectoq
+False,double,RECTQ -- Receivables - Total (RECTQ),rectq
+False,double,RECTRQ -- Receivables - Trade (RECTRQ),rectrq
+False,double,RECUBQ -- Unbilled Receivables - Quarterly (RECUBQ),recubq
+False,double,REQ -- Retained Earnings (REQ),req
+False,double,RETQ -- Total RE Property (RETQ),retq
+False,double,REUNAQ -- Unadjusted Retained Earnings (REUNAQ),reunaq
+False,double,REVTQ -- Revenue - Total (REVTQ),revtq
+False,double,RLLQ -- Reserve for Loan/Asset Losses (RLLQ),rllq
+False,double,RRA12 -- Reversal - Restructruring/Acquisition Aftertax 12MM (RRA12),rra12
+False,double,RRAQ -- Reversal - Restructruring/Acquisition Aftertax (RRAQ),rraq
+False,double,RRD12 -- Reversal - Restructuring/Acq Diluted EPS Effect 12MM (RRD12),rrd12
+False,double,RRDQ -- Reversal - Restructuring/Acq Diluted EPS Effect (RRDQ),rrdq
+False,double,RREPS12 -- Reversal - Restructuring/Acq Basic EPS Effect 12MM (RREPS12),rreps12
+False,double,RREPSQ -- Reversal - Restructuring/Acq Basic EPS Effect (RREPSQ),rrepsq
+False,double,RRPQ -- Reversal - Restructruring/Acquisition Pretax (RRPQ),rrpq
+False,double,RSTCHELTQ -- Long-Term Restricted Cash & Investments (RSTCHELTQ),rstcheltq
+False,double,RSTCHEQ -- Restricted Cash & Investments - Current (RSTCHEQ),rstcheq
+False,double,SALEQ -- Sales/Turnover (Net) (SALEQ),saleq
+False,double,SEQOQ -- Other Stockholders- Equity Adjustments (SEQOQ),seqoq
+False,double,SEQQ -- Stockholders Equity > Parent > Index Fundamental > Quarterly (SEQQ),seqq
+False,double,SETA12 -- Settlement (Litigation/Insurance) AfterTax - 12mm (SETA12),seta12
+False,double,SETAQ -- Settlement (Litigation/Insurance) After-tax (SETAQ),setaq
+False,double,SETD12 -- Settlement (Litigation/Insurance) Diluted EPS Effect 12MM (SETD12),setd12
+False,double,SETDQ -- Settlement (Litigation/Insurance) Diluted EPS Effect (SETDQ),setdq
+False,double,SETEPS12 -- Settlement (Litigation/Insurance) Basic EPS Effect 12MM (SETEPS12),seteps12
+False,double,SETEPSQ -- Settlement (Litigation/Insurance) Basic EPS Effect (SETEPSQ),setepsq
+False,double,SETPQ -- Settlement (Litigation/Insurance) Pretax (SETPQ),setpq
+False,double,SPCE12 -- S&P Core Earnings 12MM (SPCE12),spce12
+False,double,SPCED12 -- S&P Core Earnings EPS Diluted 12MM (SPCED12),spced12
+False,double,SPCEDPQ -- S&P Core Earnings EPS Diluted - Preliminary (SPCEDPQ),spcedpq
+False,double,SPCEDQ -- S&P Core Earnings EPS Diluted (SPCEDQ),spcedq
+False,double,SPCEEPS12 -- S&P Core Earnings EPS Basic 12MM (SPCEEPS12),spceeps12
+False,double,SPCEEPSP12 -- S&P Core 12MM EPS - Basic - Preliminary (SPCEEPSP12),spceepsp12
+False,double,SPCEEPSPQ -- S&P Core Earnings EPS Basic - Preliminary (SPCEEPSPQ),spceepspq
+False,double,SPCEEPSQ -- S&P Core Earnings EPS Basic (SPCEEPSQ),spceepsq
+False,double,SPCEP12 -- S&P Core Earnings 12MM - Preliminary (SPCEP12),spcep12
+False,double,SPCEPD12 -- S&P Core Earnings 12MM EPS Diluted - Preliminary (SPCEPD12),spcepd12
+False,double,SPCEPQ -- S&P Core Earnings - Preliminary (SPCEPQ),spcepq
+False,double,SPCEQ -- S&P Core Earnings (SPCEQ),spceq
+False,double,SPIDQ -- Other Special Items Diluted EPS Effect (SPIDQ),spidq
+False,double,SPIEPSQ -- Other Special Items Basic EPS Effect (SPIEPSQ),spiepsq
+False,double,SPIOAQ -- Other Special Items After-tax (SPIOAQ),spioaq
+False,double,SPIOPQ -- Other Special Items Pretax (SPIOPQ),spiopq
+False,double,SPIQ -- Special Items (SPIQ),spiq
+False,double,SRETQ -- Gain/Loss on Sale of Property (SRETQ),sretq
+False,double,STKCOQ -- Stock Compensation Expense (STKCOQ),stkcoq
+False,double,STKCPAQ -- After-tax stock compensation (STKCPAQ),stkcpaq
+False,double,TEQQ -- Stockholders Equity - Total (TEQQ),teqq
+False,double,TFVAQ -- Total Fair Value Assets (TFVAQ),tfvaq
+False,double,TFVCEQ -- Total Fair Value Changes including Earnings (TFVCEQ),tfvceq
+False,double,TFVLQ -- Total Fair Value Liabilities (TFVLQ),tfvlq
+False,double,TIEQ -- Interest Expense - Total (Financial Services) (TIEQ),tieq
+False,double,TIIQ -- Interest Income - Total (Financial Services) (TIIQ),tiiq
+False,double,TSTKNQ -- Treasury Stock - Number of Common Shares (TSTKNQ),tstknq
+False,double,TSTKQ -- Treasury Stock - Total (All Capital) (TSTKQ),tstkq
+False,double,TXDBAQ -- Deferred Tax Asset - Long Term (TXDBAQ),txdbaq
+False,double,TXDBCAQ -- Current Deferred Tax Asset (TXDBCAQ),txdbcaq
+False,double,TXDBCLQ -- Current Deferred Tax Liability (TXDBCLQ),txdbclq
+False,double,TXDBQ -- Deferred Taxes - Balance Sheet (TXDBQ),txdbq
+False,double,TXDIQ -- Income Taxes - Deferred (TXDIQ),txdiq
+False,double,TXDITCQ -- Deferred Taxes and Investment Tax Credit (TXDITCQ),txditcq
+False,double,TXPQ -- Income Taxes Payable (TXPQ),txpq
+False,double,TXTQ -- Income Taxes - Total (TXTQ),txtq
+False,double,TXWQ -- Excise Taxes (TXWQ),txwq
+False,double,UACOQ -- Current Assets - Other - Utility (UACOQ),uacoq
+False,double,UAOQ -- Other Assets - Utility (UAOQ),uaoq
+False,double,UAPTQ -- Accounts Payable - Utility (UAPTQ),uaptq
+False,double,UCAPSQ -- Paid In Capital - Other - Utility (UCAPSQ),ucapsq
+False,double,UCCONSQ -- Contributions In Aid Of Construction (UCCONSQ),ucconsq
+False,double,UCEQQ -- Common Equity - Total - Utility (UCEQQ),uceqq
+False,double,UDDQ -- Debt (Debentures) - Utility (UDDQ),uddq
+False,double,UDMBQ -- Debt (Mortgage Bonds) (UDMBQ),udmbq
+False,double,UDOLTQ -- Debt (Other Long-Term) (UDOLTQ),udoltq
+False,double,UDPCOQ -- Debt (Pollution Control Obligations) (UDPCOQ),udpcoq
+False,double,UDVPQ -- Preferred Dividend Requirements (UDVPQ),udvpq
+False,double,UGIQ -- Gross Income (Income Before Interest Charges) (UGIQ),ugiq
+False,double,UINVQ -- Inventories (UINVQ),uinvq
+False,double,ULCOQ -- Current Liabilities - Other (ULCOQ),ulcoq
+False,double,UNIAMIQ -- Net Income before Extraordinary Items After Noncontrolling Interest (UNIAMIQ),uniamiq
+False,double,UNOPINCQ -- Nonoperating Income (Net) - Other (UNOPINCQ),unopincq
+False,double,UOPIQ -- Operating Income - Total - Utility (UOPIQ),uopiq
+False,double,UPDVPQ -- Preference Dividend Requirements - Utility (UPDVPQ),updvpq
+False,double,UPMCSTKQ -- Premium On Common Stock - Utility (UPMCSTKQ),upmcstkq
+False,double,UPMPFQ -- Premium On Preferred Stock - Utility (UPMPFQ),upmpfq
+False,double,UPMPFSQ -- Premium On Preference Stock - Utility (UPMPFSQ),upmpfsq
+False,double,UPMSUBPQ -- Premium On Subsidiary Preferred Stock - Utility (UPMSUBPQ),upmsubpq
+False,double,UPSTKCQ -- Preference Stock At Carrying Value - Utility (UPSTKCQ),upstkcq
+False,double,UPSTKQ -- Preferred Stock At Carrying Value - Utility (UPSTKQ),upstkq
+False,double,URECTQ -- Receivables (Net) - Utility (URECTQ),urectq
+False,double,USPIQ -- Special Items - Utility (USPIQ),uspiq
+False,double,USUBDVPQ -- Subsidiary Preferred Dividends - Utility (USUBDVPQ),usubdvpq
+False,double,USUBPCVQ -- Subsidiary Preferred Stock At Carrying Value - Utility (USUBPCVQ),usubpcvq
+False,double,UTEMQ -- Maintenance Expense - Total (UTEMQ),utemq
+False,double,WCAPQ -- Working Capital (Balance Sheet) (WCAPQ),wcapq
+False,double,WDAQ -- Writedowns After-tax (WDAQ),wdaq
+False,double,WDDQ -- Writedowns Diluted EPS Effect (WDDQ),wddq
+False,double,WDEPSQ -- Writedowns Basic EPS Effect (WDEPSQ),wdepsq
+False,double,WDPQ -- Writedowns Pretax (WDPQ),wdpq
+False,double,XACCQ -- Accrued Expenses (XACCQ),xaccq
+False,double,XIDOQ -- Extraordinary Items and Discontinued Operations (XIDOQ),xidoq
+False,double,XINTQ -- Interest and Related Expense- Total (XINTQ),xintq
+False,double,XIQ -- Extraordinary Items (XIQ),xiq
+False,double,XOPRQ -- Operating Expense- Total (XOPRQ),xoprq
+False,double,XOPT12 -- Implied Option Expense - 12mm (XOPT12),xopt12
+False,double,XOPTD12 -- Implied Option EPS Diluted 12MM (XOPTD12),xoptd12
+False,double,XOPTD12P -- Implied Option 12MM EPS Diluted Preliminary (XOPTD12P),xoptd12p
+False,double,XOPTDQ -- Implied Option EPS Diluted (XOPTDQ),xoptdq
+False,double,XOPTDQP -- Implied Option EPS Diluted Preliminary (XOPTDQP),xoptdqp
+False,double,XOPTEPS12 -- Implied Option EPS Basic 12MM (XOPTEPS12),xopteps12
+False,double,XOPTEPSP12 -- Implied Option 12MM EPS Basic Preliminary (XOPTEPSP12),xoptepsp12
+False,double,XOPTEPSQ -- Implied Option EPS Basic (XOPTEPSQ),xoptepsq
+False,double,XOPTEPSQP -- Implied Option EPS Basic Preliminary (XOPTEPSQP),xoptepsqp
+False,double,XOPTQ -- Implied Option Expense (XOPTQ),xoptq
+False,double,XOPTQP -- Implied Option Expense Preliminary (XOPTQP),xoptqp
+False,double,XRDQ -- Research and Development Expense (XRDQ),xrdq
+False,double,"XSGAQ -- Selling, General and Administrative Expenses (XSGAQ)",xsgaq
+False,double,ACCHGY -- Accounting Changes - Cumulative Effect (ACCHGY),acchgy
+False,double,AFUDCCY -- Allowance for Funds Used During Construction (Cash Flow) (AFUDCCY),afudccy
+False,double,AFUDCIY -- Allowance for Funds Used During Construction (Investing) (Cash Flow) (AFUDCIY),afudciy
+False,double,AMCY -- Amortization (Cash Flow) (AMCY),amcy
+False,double,AOLOCHY -- Assets and Liabilities - Other (Net Change) (AOLOCHY),aolochy
+False,double,APALCHY -- Accounts Payable and Accrued Liabilities - Increase (Decrease) (APALCHY),apalchy
+False,double,AQAY -- Acquisition/Merger After-Tax (AQAY),aqay
+False,double,AQCY -- Acquisitions (AQCY),aqcy
+False,double,AQDY -- Acquisition/Merger Diluted EPS Effect (AQDY),aqdy
+False,double,AQEPSY -- Acquisition/Merger Basic EPS Effect (AQEPSY),aqepsy
+False,double,AQPY -- Acquisition/Merger Pretax (AQPY),aqpy
+False,double,ARCEDY -- As Reported Core - Diluted EPS Effect (ARCEDY),arcedy
+False,double,ARCEEPSY -- As Reported Core - Basic EPS Effect (ARCEEPSY),arceepsy
+False,double,ARCEY -- As Reported Core - After-tax (ARCEY),arcey
+False,double,CAPXY -- Capital Expenditures (CAPXY),capxy
+False,double,CDVCY -- Cash Dividends on Common Stock (Cash Flow) (CDVCY),cdvcy
+False,double,CHECHY -- Cash and Cash Equivalents - Increase (Decrease) (CHECHY),chechy
+False,double,CIBEGNIY -- Comp Inc - Beginning Net Income (CIBEGNIY),cibegniy
+False,double,CICURRY -- Comp Inc - Currency Trans Adj (CICURRY),cicurry
+False,double,CIDERGLY -- Comp Inc - Derivative Gains/Losses (CIDERGLY),cidergly
+False,double,CIMIIY -- Comprehensive Income - Noncontrolling Interest (CIMIIY),cimiiy
+False,double,CIOTHERY -- Comp Inc - Other Adj (CIOTHERY),ciothery
+False,double,CIPENY -- Comp Inc - Minimum Pension Adj (CIPENY),cipeny
+False,double,CISECGLY -- Comp Inc - Securities Gains/Losses (CISECGLY),cisecgly
+False,double,CITOTALY -- Comprehensive Income - Parent (CITOTALY),citotaly
+False,double,CIY -- Comprehensive Income - Total (CIY),ciy
+False,double,COGSY -- Cost of Goods Sold (COGSY),cogsy
+False,double,CSHFDY -- Com Shares for Diluted EPS (CSHFDY),cshfdy
+False,double,CSHPRY -- Common Shares Used to Calculate Earnings Per Share - Basic (CSHPRY),cshpry
+False,double,CSTKEY -- Common Stock Equivalents - Dollar Savings (CSTKEY),cstkey
+False,double,DEPCY -- Depreciation and Depletion (Cash Flow) (DEPCY),depcy
+False,double,DERHEDGLY -- Gains/Losses on Derivatives and Hedging (DERHEDGLY),derhedgly
+False,double,DILADY -- Dilution Adjustment (DILADY),dilady
+False,double,DILAVY -- Dilution Available - Excluding Extraordinary Items (DILAVY),dilavy
+False,double,DLCCHY -- Changes in Current Debt (DLCCHY),dlcchy
+False,double,DLTISY -- Long-Term Debt - Issuance (DLTISY),dltisy
+False,double,DLTRY -- Long-Term Debt - Reduction (DLTRY),dltry
+False,double,DOY -- Discontinued Operations (DOY),doy
+False,double,DPCY -- Depreciation and Amortization - Statement of Cash Flows (DPCY),dpcy
+False,double,DPRETY -- Depr/Amort of Property (DPRETY),dprety
+False,double,DPY -- Depreciation and Amortization - Total (DPY),dpy
+False,double,DTEAY -- Extinguishment of Debt After-tax (DTEAY),dteay
+False,double,DTEDY -- Extinguishment of Debt Diluted EPS Effect (DTEDY),dtedy
+False,double,DTEEPSY -- Extinguishment of Debt Basic EPS Effect (DTEEPSY),dteepsy
+False,double,DTEPY -- Extinguishment of Debt Pretax (DTEPY),dtepy
+False,double,DVPY -- Dividends - Preferred/Preference (DVPY),dvpy
+False,double,DVY -- Cash Dividends (DVY),dvy
+False,double,EPSFIY -- Earnings Per Share (Diluted) - Including Extraordinary Items (EPSFIY),epsfiy
+False,double,EPSFXY -- Earnings Per Share (Diluted) - Excluding Extraordinary items (EPSFXY),epsfxy
+False,double,EPSPIY -- Earnings Per Share (Basic) - Including Extraordinary Items (EPSPIY),epspiy
+False,double,EPSPXY -- Earnings Per Share (Basic) - Excluding Extraordinary Items (EPSPXY),epspxy
+False,double,ESUBCY -- Equity in Net Loss/Earnings (C/F) (ESUBCY),esubcy
+False,double,ESUBY -- Equity in Earnings (I/S)- Unconsolidated Subsidiaries (ESUBY),esuby
+False,double,EXREY -- Exchange Rate Effect (EXREY),exrey
+False,double,FCAY -- Foreign Exchange Income (Loss) (FCAY),fcay
+False,double,FFOY -- Funds From Operations (REIT) (FFOY),ffoy
+False,double,FIAOY -- Financing Activities - Other (FIAOY),fiaoy
+False,double,FINCFY -- Financing Activities - Net Cash Flow (FINCFY),fincfy
+False,double,FINREVY -- Finance Division Revenue (FINREVY),finrevy
+False,double,FINXINTY -- Finance Division Interest Expense (FINXINTY),finxinty
+False,double,FINXOPRY -- Finance Division Operating Expense (FINXOPRY),finxopry
+False,double,FOPOXY -- Funds from Operations - Other excluding Option Tax Benefit (FOPOXY),fopoxy
+False,double,FOPOY -- Funds from Operations - Other (FOPOY),fopoy
+False,double,FOPTY -- Funds From Operations - Total (FOPTY),fopty
+False,double,FSRCOY -- Sources of Funds - Other (FSRCOY),fsrcoy
+False,double,FSRCTY -- Sources of Funds - Total (FSRCTY),fsrcty
+False,double,FUSEOY -- Uses of Funds - Other (FUSEOY),fuseoy
+False,double,FUSETY -- Uses of Funds - Total (FUSETY),fusety
+False,double,FYR -- Fiscal Year-end Month (FYR),fyr
+False,double,GDWLAMY -- Amortization of Goodwill (GDWLAMY),gdwlamy
+False,double,GDWLIAY -- Impairment of Goodwill After-tax (GDWLIAY),gdwliay
+False,double,GDWLIDY -- Impairment of Goodwill Diluted EPS Effect (GDWLIDY),gdwlidy
+False,double,GDWLIEPSY -- Impairment of Goodwill Basic EPS Effect (GDWLIEPSY),gdwliepsy
+False,double,GDWLIPY -- Impairment of Goodwill Pretax (GDWLIPY),gdwlipy
+False,double,GLAY -- Gain/Loss After-Tax (GLAY),glay
+False,double,GLCEAY -- Gain/Loss on Sale (Core Earnings Adjusted) After-tax (GLCEAY),glceay
+False,double,GLCEDY -- Gain/Loss on Sale (Core Earnings Adjusted) Diluted EPS (GLCEDY),glcedy
+False,double,GLCEEPSY -- Gain/Loss on Sale (Core Earnings Adjusted) Basic EPS Effect (GLCEEPSY),glceepsy
+False,double,GLCEPY -- Gain/Loss on Sale (Core Earnings Adjusted) Pretax (GLCEPY),glcepy
+False,double,GLDY -- Gain/Loss Diluted EPS Effect (GLDY),gldy
+False,double,GLEPSY -- Gain/Loss Basic EPS Effect (GLEPSY),glepsy
+False,double,GLIVY -- Gains/Losses on investments (GLIVY),glivy
+False,double,GLPY -- Gain/Loss Pretax (GLPY),glpy
+False,double,HEDGEGLY -- Gain/Loss on Ineffective Hedges (HEDGEGLY),hedgegly
+False,double,IBADJY -- Income Before Extraordinary Items - Adjusted for Common Stock Equivalents (IBADJY),ibadjy
+False,double,IBCOMY -- Income Before Extraordinary Items - Available for Common (IBCOMY),ibcomy
+False,double,IBCY -- Income Before Extraordinary Items - Statement of Cash Flows (IBCY),ibcy
+False,double,IBMIIY -- Income before Extraordinary Items and Noncontrolling Interests (IBMIIY),ibmiiy
+False,double,IBY -- Income Before Extraordinary Items (IBY),iby
+False,double,INTPNY -- Interest Paid - Net (INTPNY),intpny
+False,double,INVCHY -- Inventory - Decrease (Increase) (INVCHY),invchy
+False,double,ITCCY -- Investment Tax Credit - Net (Cash Flow) (ITCCY),itccy
+False,double,IVACOY -- Investing Activities - Other (IVACOY),ivacoy
+False,double,IVCHY -- Increase in Investments (IVCHY),ivchy
+False,double,IVNCFY -- Investing Activities - Net Cash Flow (IVNCFY),ivncfy
+False,double,IVSTCHY -- Short-Term Investments - Change (IVSTCHY),ivstchy
+False,double,MIIY -- Noncontrolling Interest - Income Account (MIIY),miiy
+False,double,NCOY -- Net Charge-Offs (NCOY),ncoy
+False,double,NIITY -- Net Interest Income (Tax Equivalent) (NIITY),niity
+False,double,NIMY -- Net Interest Margin (NIMY),nimy
+False,double,NIY -- Net Income (Loss) (NIY),niy
+False,double,NOPIY -- Non-Operating Income (Expense) - Total (NOPIY),nopiy
+False,double,NRTXTDY -- Nonrecurring Income Taxes Diluted EPS Effect (NRTXTDY),nrtxtdy
+False,double,NRTXTEPSY -- Nonrecurring Income Taxes Basic EPS Effect (NRTXTEPSY),nrtxtepsy
+False,double,NRTXTY -- Nonrecurring Income Taxes - After-tax (NRTXTY),nrtxty
+False,double,OANCFY -- Operating Activities - Net Cash Flow (OANCFY),oancfy
+False,double,OEPSXY -- Earnings Per Share - Diluted - from Operations (OEPSXY),oepsxy
+False,double,OIADPY -- Operating Income After Depreciation - Year-to-Date (OIADPY),oiadpy
+False,double,OIBDPY -- Operating Income Before Depreciation (OIBDPY),oibdpy
+False,double,OPEPSY -- Earnings Per Share from Operations (OPEPSY),opepsy
+False,double,OPTDRY -- Dividend Rate - Assumption (%) (OPTDRY),optdry
+False,double,OPTFVGRY -- Options - Fair Value of Options Granted (OPTFVGRY),optfvgry
+False,double,OPTLIFEY -- Life of Options - Assumption (# yrs) (OPTLIFEY),optlifey
+False,double,OPTRFRY -- Risk Free Rate - Assumption (%) (OPTRFRY),optrfry
+False,double,OPTVOLY -- Volatility - Assumption (%) (OPTVOLY),optvoly
+False,double,PDVCY -- Cash Dividends on Preferred/Preference Stock (Cash Flow) (PDVCY),pdvcy
+False,double,PIY -- Pretax Income (PIY),piy
+False,double,PLLY -- Provision for Loan/Asset Losses (PLLY),plly
+False,double,PNCDY -- Core Pension Adjustment Diluted EPS Effect (PNCDY),pncdy
+False,double,PNCEPSY -- Core Pension Adjustment Basic EPS Effect (PNCEPSY),pncepsy
+False,double,PNCIAPY -- Core Pension Interest Adjustment After-tax Preliminary (PNCIAPY),pnciapy
+False,double,PNCIAY -- Core Pension Interest Adjustment After-tax (PNCIAY),pnciay
+False,double,PNCIDPY -- Core Pension Interest Adjustment Diluted EPS Effect Preliminary (PNCIDPY),pncidpy
+False,double,PNCIDY -- Core Pension Interest Adjustment Diluted EPS Effect (PNCIDY),pncidy
+False,double,PNCIEPSPY -- Core Pension Interest Adjustment Basic EPS Effect Preliminary (PNCIEPSPY),pnciepspy
+False,double,PNCIEPSY -- Core Pension Interest Adjustment Basic EPS Effect (PNCIEPSY),pnciepsy
+False,double,PNCIPPY -- Core Pension Interest Adjustment Pretax Preliminary (PNCIPPY),pncippy
+False,double,PNCIPY -- Core Pension Interest Adjustment Pretax (PNCIPY),pncipy
+False,double,PNCPDY -- Core Pension Adjustment Diluted EPS Effect Preliminary (PNCPDY),pncpdy
+False,double,PNCPEPSY -- Core Pension Adjustment Basic EPS Effect Preliminary (PNCPEPSY),pncpepsy
+False,double,PNCPY -- Core Pension Adjustment Preliminary (PNCPY),pncpy
+False,double,PNCWIAPY -- Core Pension w/o Interest Adjustment After-tax Preliminary (PNCWIAPY),pncwiapy
+False,double,PNCWIAY -- Core Pension w/o Interest Adjustment After-tax (PNCWIAY),pncwiay
+False,double,PNCWIDPY -- Core Pension w/o Interest Adjustment Diluted EPS Effect Preliminary (PNCWIDPY),pncwidpy
+False,double,PNCWIDY -- Core Pension w/o Interest Adjustment Diluted EPS Effect (PNCWIDY),pncwidy
+False,double,PNCWIEPSY -- Core Pension w/o Interest Adjustment Basic EPS Effect (PNCWIEPSY),pncwiepsy
+False,double,PNCWIEPY -- Core Pension w/o Interest Adjustment Basic EPS Effect Preliminary (PNCWIEPY),pncwiepy
+False,double,PNCWIPPY -- Core Pension w/o Interest Adjustment Pretax Preliminary (PNCWIPPY),pncwippy
+False,double,PNCWIPY -- Core Pension w/o Interest Adjustment Pretax (PNCWIPY),pncwipy
+False,double,PNCY -- Core Pension Adjustment (PNCY),pncy
+False,double,PRCAY -- Core Post Retirement Adjustment (PRCAY),prcay
+False,double,PRCDY -- Core Post Retirement Adjustment Diluted EPS Effect (PRCDY),prcdy
+False,double,PRCEPSY -- Core Post Retirement Adjustment Basic EPS Effect (PRCEPSY),prcepsy
+False,double,PRCPDY -- Core Post Retirement Adjustment Diluted EPS Effect Preliminary (PRCPDY),prcpdy
+False,double,PRCPEPSY -- Core Post Retirement Adjustment Basic EPS Effect Preliminary (PRCPEPSY),prcpepsy
+False,double,PRCPY -- Core Post Retirement Adjustment Preliminary (PRCPY),prcpy
+False,double,PRSTKCCY -- Purchase of Common Stock (Cash Flow) (PRSTKCCY),prstkccy
+False,double,PRSTKCY -- Purchase of Common and Preferred Stock (PRSTKCY),prstkcy
+False,double,PRSTKPCY -- Purchase of Preferred/Preference Stock (Cash Flow) (PRSTKPCY),prstkpcy
+False,double,RCAY -- Restructuring Cost After-tax (RCAY),rcay
+False,double,RCDY -- Restructuring Cost Diluted EPS Effect (RCDY),rcdy
+False,double,RCEPSY -- Restructuring Cost Basic EPS Effect (RCEPSY),rcepsy
+False,double,RCPY -- Restructuring Cost Pretax (RCPY),rcpy
+False,double,RDIPAY -- In Process R&D Expense After-tax (RDIPAY),rdipay
+False,double,RDIPDY -- In Process R&D Expense Diluted EPS Effect (RDIPDY),rdipdy
+False,double,RDIPEPSY -- In Process R&D Expense Basic EPS Effect (RDIPEPSY),rdipepsy
+False,double,RDIPY -- In Process R&D (RDIPY),rdipy
+False,double,RECCHY -- Accounts Receivable - Decrease (Increase) (RECCHY),recchy
+False,double,REVTY -- Revenue - Total (REVTY),revty
+False,double,RRAY -- Reversal - Restructruring/Acquisition Aftertax (RRAY),rray
+False,double,RRDY -- Reversal - Restructuring/Acq Diluted EPS Effect (RRDY),rrdy
+False,double,RREPSY -- Reversal - Restructuring/Acq Basic EPS Effect (RREPSY),rrepsy
+False,double,RRPY -- Reversal - Restructruring/Acquisition Pretax (RRPY),rrpy
+False,double,SALEY -- Sales/Turnover (Net) (SALEY),saley
+False,double,SCSTKCY -- Sale of Common Stock (Cash Flow) (SCSTKCY),scstkcy
+False,double,SETAY -- Settlement (Litigation/Insurance) After-tax (SETAY),setay
+False,double,SETDY -- Settlement (Litigation/Insurance) Diluted EPS Effect (SETDY),setdy
+False,double,SETEPSY -- Settlement (Litigation/Insurance) Basic EPS Effect (SETEPSY),setepsy
+False,double,SETPY -- Settlement (Litigation/Insurance) Pretax (SETPY),setpy
+False,double,SIVY -- Sale of Investments (SIVY),sivy
+False,double,SPCEDPY -- S&P Core Earnings EPS Diluted - Preliminary (SPCEDPY),spcedpy
+False,double,SPCEDY -- S&P Core Earnings EPS Diluted (SPCEDY),spcedy
+False,double,SPCEEPSPY -- S&P Core Earnings EPS Basic - Preliminary (SPCEEPSPY),spceepspy
+False,double,SPCEEPSY -- S&P Core Earnings EPS Basic (SPCEEPSY),spceepsy
+False,double,SPCEPY -- S&P Core Earnings - Preliminary (SPCEPY),spcepy
+False,double,SPCEY -- S&P Core Earnings (SPCEY),spcey
+False,double,SPIDY -- Other Special Items Diluted EPS Effect (SPIDY),spidy
+False,double,SPIEPSY -- Other Special Items Basic EPS Effect (SPIEPSY),spiepsy
+False,double,SPIOAY -- Other Special Items After-tax (SPIOAY),spioay
+False,double,SPIOPY -- Other Special Items Pretax (SPIOPY),spiopy
+False,double,SPIY -- Special Items (SPIY),spiy
+False,double,SPPEY -- Sale of Property (SPPEY),sppey
+False,double,SPPIVY -- Sale of PP&E and Investments - (Gain) Loss (SPPIVY),sppivy
+False,double,SPSTKCY -- Sale of Preferred/Preference Stock (Cash Flow) (SPSTKCY),spstkcy
+False,double,SRETY -- Gain/Loss on Sale of Property (SRETY),srety
+False,double,SSTKY -- Sale of Common and Preferred Stock (SSTKY),sstky
+False,double,STKCOY -- Stock Compensation Expense (STKCOY),stkcoy
+False,double,STKCPAY -- After-tax stock compensation (STKCPAY),stkcpay
+False,double,TDCY -- Deferred Income Taxes - Net (Cash Flow) (TDCY),tdcy
+False,double,TFVCEY -- Total Fair Value Changes including Earnings (TFVCEY),tfvcey
+False,double,TIEY -- Interest Expense - Total (Financial Services) (TIEY),tiey
+False,double,TIIY -- Interest Income - Total (Financial Services) (TIIY),tiiy
+False,double,TSAFCY -- Total Srcs of Funds (FOF) (TSAFCY),tsafcy
+False,double,TXACHY -- Income Taxes - Accrued - Increase (Decrease) (TXACHY),txachy
+False,double,TXBCOFY -- Excess Tax Benefit of Stock Options - Cash Flow Financing (TXBCOFY),txbcofy
+False,double,TXBCOY -- Excess Tax Benefit of Stock Options - Cash Flow Operating (TXBCOY),txbcoy
+False,double,TXDCY -- Deferred Taxes (Statement of Cash Flows) (TXDCY),txdcy
+False,double,TXDIY -- Income Taxes - Deferred (TXDIY),txdiy
+False,double,TXPDY -- Income Taxes Paid (TXPDY),txpdy
+False,double,TXTY -- Income Taxes - Total (TXTY),txty
+False,double,TXWY -- Excise Taxes (TXWY),txwy
+False,double,UAOLOCHY -- Other Assets and Liabilities - Net Change (Statement of Cash Flows) (UAOLOCHY),uaolochy
+False,double,UDFCCY -- Deferred Fuel - Increase (Decrease) (Statement of Cash Flows) (UDFCCY),udfccy
+False,double,UDVPY -- Preferred Dividend Requirements - Utility (UDVPY),udvpy
+False,double,UFRETSDY -- Tot Funds Ret ofSec&STD (FOF) (UFRETSDY),ufretsdy
+False,double,UGIY -- Gross Income (Income Before Interest Charges) - Utility (UGIY),ugiy
+False,double,UNIAMIY -- Net Income before Extraordinary Items After Noncontrolling Interest - Utili (UNIAMIY),uniamiy
+False,double,UNOPINCY -- Nonoperating Income (Net) - Other - Utility (UNOPINCY),unopincy
+False,double,UNWCCY -- Inc(Dec)Working Cap (FOF) (UNWCCY),unwccy
+False,double,UOISY -- Other Internal Sources - Net (Cash Flow) (UOISY),uoisy
+False,double,UPDVPY -- Preference Dividend Requirements - Utility (UPDVPY),updvpy
+False,double,UPTACY -- Utility Plant - Gross Additions (Cash Flow) (UPTACY),uptacy
+False,double,USPIY -- Special Items - Utility (USPIY),uspiy
+False,double,USTDNCY -- Net Decr in ST Debt (FOF) (USTDNCY),ustdncy
+False,double,USUBDVPY -- Subsidiary Preferred Dividends - Utility (USUBDVPY),usubdvpy
+False,double,UTFDOCY -- Total Funds From Ops (FOF) (UTFDOCY),utfdocy
+False,double,UTFOSCY -- Tot Funds Frm Outside Sources (FOF) (UTFOSCY),utfoscy
+False,double,UTMEY -- Maintenance Expense - Total (UTMEY),utmey
+False,double,UWKCAPCY -- Dec(Inc) in Working Capital (FOF) (UWKCAPCY),uwkcapcy
+False,double,WCAPCHY -- Working Capital Changes - Total (WCAPCHY),wcapchy
+False,double,WCAPCY -- Working Capital Change - Other - Increase/(Decrease) (WCAPCY),wcapcy
+False,double,WDAY -- Writedowns After-tax (WDAY),wday
+False,double,WDDY -- Writedowns Diluted EPS Effect (WDDY),wddy
+False,double,WDEPSY -- Writedowns Basic EPS Effect (WDEPSY),wdepsy
+False,double,WDPY -- Writedowns Pretax (WDPY),wdpy
+False,double,XIDOCY -- Extraordinary Items and Discontinued Operations (Statement of Cash Flows) (XIDOCY),xidocy
+False,double,XIDOY -- Extraordinary Items and Discontinued Operations (XIDOY),xidoy
+False,double,XINTY -- Interest and Related Expense- Total (XINTY),xinty
+False,double,XIY -- Extraordinary Items (XIY),xiy
+False,double,XOPRY -- Operating Expense- Total (XOPRY),xopry
+False,double,XOPTDQPY -- Implied Option EPS Diluted Preliminary (XOPTDQPY),xoptdqpy
+False,double,XOPTDY -- Implied Option EPS Diluted (XOPTDY),xoptdy
+False,double,XOPTEPSQPY -- Implied Option EPS Basic Preliminary (XOPTEPSQPY),xoptepsqpy
+False,double,XOPTEPSY -- Implied Option EPS Basic (XOPTEPSY),xoptepsy
+False,double,XOPTQPY -- Implied Option Expense Preliminary (XOPTQPY),xoptqpy
+False,double,XOPTY -- Implied Option Expense (XOPTY),xopty
+False,double,XRDY -- Research and Development Expense (XRDY),xrdy
+False,double,"XSGAY -- Selling, General and Administrative Expenses (XSGAY)",xsgay
+False,double,ADJEX -- Cumulative Adjustment Factor by Ex-Date (ADJEX),adjex
+False,double,CSHTRQ -- Common Shares Traded - Quarter (CSHTRQ),cshtrq
+False,double,DVPSPQ -- Dividends per Share - Pay Date - Quarter (DVPSPQ),dvpspq
+False,double,DVPSXQ -- Div per Share - Exdate - Quarter (DVPSXQ),dvpsxq
+False,double,MKVALTQ -- Market Value - Total (MKVALTQ),mkvaltq
+False,double,PRCCQ -- Price Close - Quarter (PRCCQ),prccq
+False,double,PRCHQ -- Price High - Quarter (PRCHQ),prchq
+False,double,PRCLQ -- Price Low - Quarter (PRCLQ),prclq

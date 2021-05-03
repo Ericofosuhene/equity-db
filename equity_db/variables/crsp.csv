@@ -1,0 +1,84 @@
+static,type,description,name
+True,string,Standard and Poor's Identifier (GVKEY),gvkey
+True,string,Security-level Identifier (LIID),liid
+True,date,First Effective Date of Link (LINKDT),linkdt
+True,date,Last Effective Date of Link (LINKENDDT),linkenddt
+True,string,Primary Link Marker (LINKPRIM),linkprim
+True,string,Link Type Code (LINKTYPE),linktype
+True,double,Historical CRSP PERMCO Link to COMPUSTAT Record (LPERMCO),lpermco
+True,double,Historical CRSP PERMNO Link to COMPUSTAT Record (LPERMNO),lpermno
+True,string,Company Name (CONM),conm
+True,string,Ticker Symbol (TIC),tic
+True,string,CUSIP (CUSIP),cusip
+True,string,CIK Number (CIK),cik
+True,double,Stock Exchange Code (EXCHG),exchg
+True,string,Security Status Market (SECSTAT),secstat
+True,string,Foreign Incorporation Code (FIC),fic
+True,string,Issue Type Code (TPCI),tpci
+True,string,ADD1 -- Address Line 1 (ADD1),add1
+True,string,ADD2 -- Address Line 2 (ADD2),add2
+True,string,ADD3 -- Address Line 3 (ADD3),add3
+True,string,ADD4 -- Address Line 4 (ADD4),add4
+True,string,ADDZIP -- Postal Code (ADDZIP),addzip
+True,string,BUSDESC -- S&P Business Description (BUSDESC),busdesc
+True,string,CITY -- City (CITY),city
+True,string,CONML -- Company Legal Name (CONML),conml
+True,string,COSTAT -- Active/Inactive Status Marker (COSTAT),costat
+True,string,COUNTY -- County Code (COUNTY),county
+True,date,DLDTE -- Research Company Deletion Date (DLDTE),dldte
+True,string,DLRSN -- Research Co Reason for Deletion (DLRSN),dlrsn
+True,string,EIN -- Employer Identification Number (EIN),ein
+True,string,FAX -- Fax Number (FAX),fax
+True,double,FYRC -- Current Fiscal Year End Month (FYRC),fyrc
+True,double,GGROUP -- GIC Groups (GGROUP),ggroup
+True,string,GIND -- GIC Industries (GIND),gind
+True,double,GSECTOR -- GIC Sectors (GSECTOR),gsector
+True,double,GSUBIND -- GIC Sub-Industries (GSUBIND),gsubind
+True,string,"IDBFLAG -- International, Domestic, Both Indicator (IDBFLAG)",idbflag
+True,string,INCORP -- Current State/Province of Incorporation Code (INCORP),incorp
+True,date,IPODATE -- Company Initial Public Offering Date (IPODATE),ipodate
+True,string,LOC -- Current ISO Country Code - Headquarters (LOC),loc
+True,string,NAICS -- North American Industry Classification Code (NAICS),naics
+True,string,PHONE -- Phone Number (PHONE),phone
+True,string,PRICAN -- Current Primary Issue Tag - Canada (PRICAN),prican
+True,string,PRIROW -- Primary Issue Tag - Rest of World (PRIROW),prirow
+True,string,PRIUSA -- Current Primary Issue Tag - US (PRIUSA),priusa
+True,string,SIC -- Standard Industry Classification Code (SIC),sic
+True,double,SPCINDCD -- S&P Industry Sector Code (SPCINDCD),spcindcd
+True,double,SPCSECCD -- S&P Economic Sector Code (SPCSECCD),spcseccd
+True,string,SPCSRC -- S&P Quality Ranking - Current (SPCSRC),spcsrc
+True,string,STATE -- State/Province (STATE),state
+True,double,STKO -- Stock Ownership Code (STKO),stko
+True,string,WEBURL -- Web URL (WEBURL),weburl
+False,date,date the observation occurred on,datadate
+False,double,ADRRC -- ADR Ratio - Daily (ADRRC),adrrc
+False,double,AJEXDI -- Adjustment Factor (Issue)-Cumulative by Ex-Date (AJEXDI),ajexdi
+False,date,ANNCDATE -- Dividend Declaration Date (ANNCDATE),anncdate
+False,double,CAPGN -- Capital Gains - Daily (CAPGN),capgn
+False,date,CAPGNPAYDATE -- Capital Gains Payment Date (CAPGNPAYDATE),capgnpaydate
+False,double,CHEQV -- Cash Equivalent Distributions (CHEQV),cheqv
+False,date,CHEQVPAYDATE -- Cash Equivalent Distributions per Share Payment Date (CHEQVPAYDATE),cheqvpaydate
+False,double,CSHOC -- Shares Outstanding (CSHOC),cshoc
+False,double,CSHTRD -- Trading Volume - Daily (CSHTRD),cshtrd
+False,string,CURCDD -- ISO Currency Code - Daily (CURCDD),curcdd
+False,string,CURCDDV -- ISO Currency Code - Dividend (CURCDDV),curcddv
+False,double,DIV -- Dividends per Share - Ex Date - Daily (Issue) (DIV),div
+False,double,DIVD -- Cash Dividends - Daily (DIVD),divd
+False,date,DIVDPAYDATE -- Cash Dividends - Daily Payment Date (DIVDPAYDATE),divdpaydate
+False,string,DIVDPAYDATEIND -- Cash Dividends - Daily Payment Date Indicator (DIVDPAYDATEIND),divdpaydateind
+False,double,DIVSP -- Special Cash Dividends - Daily (DIVSP),divsp
+False,date,DIVSPPAYDATE -- Special Cash Dividends - Daily Payment Date (DIVSPPAYDATE),divsppaydate
+False,double,DVI -- Indicated Annual Dividend - Current (DVI),dvi
+False,double,DVRATED -- Indicated Annual Dividend Rate - Daily (DVRATED),dvrated
+False,double,EPS -- Current EPS (EPS),eps
+False,double,EPSMO -- Current EPS Month (EPSMO),epsmo
+False,string,IID -- Issue ID - Dividends (IID),iid
+False,date,PAYDATE -- Dividend Payment Date (PAYDATE),paydate
+False,string,PAYDATEIND -- Dividend Payment Date Indicator (PAYDATEIND),paydateind
+False,double,PRCCD -- Price - Close - Daily (PRCCD),prccd
+False,double,PRCHD -- Price - High - Daily (PRCHD),prchd
+False,double,PRCLD -- Price - Low - Daily (PRCLD),prcld
+False,double,PRCOD -- Price - Open - Daily (PRCOD),prcod
+False,double,PRCSTD -- Price Status Code - Daily (PRCSTD),prcstd
+False,date,RECORDDATE -- Dividend Record Date (RECORDDATE),recorddate
+False,double,TRFD -- Daily Total Return Factor (TRFD),trfd
