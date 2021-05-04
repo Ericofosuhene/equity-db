@@ -1,6 +1,6 @@
 import pandas as pd
 from abc import ABC, abstractmethod
-from typing import Dict, Iterable, List, Optional, Set
+from typing import Dict, Iterable, List, Set
 
 
 class BaseVariables(ABC):
@@ -9,6 +9,10 @@ class BaseVariables(ABC):
         self._collection_name = collection_name
         self._identifier = identifier
         self._variables = None
+
+    @property
+    def collection_name(self):
+        return self._collection_name
 
     @property
     def identifier(self) -> str:

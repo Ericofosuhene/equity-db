@@ -61,17 +61,17 @@ def change_types_for_import(data: dd, variable: BaseVariables, date_format: str)
     partitioned_cols = variable.get_static_timeseries_intersection(data.columns)
 
     static_conversion = {
-        'string': lambda x: data[x].astype(str).astype("category"),
-        'double': lambda x: data[x].astype(int).astype(str).astype("category"),
-        'date': lambda x: pd.to_datetime(data[x], format=date_format, errors='ignore').astype(object).where(
-            data[x].notnull(), None),
+        'string': lambda x: data[x].astype("category") if data[x].dtype.name != 'category' else data[x],
+        'double': lambda x: data[x].astype(str).astype('category') if data[x].dtype.name != 'category' else data[x],
+        # 'date': lambda x: pd.to_datetime(data[x], format=date_format, errors='ignore'),
+        'date': lambda x: data[x].astype("category") if data[x].dtype.name != 'category' else data[x],
     }
 
     timeseries_conversion = {
         'string': lambda x: data[x].astype(str) if data[x].dtype != str else data[x],
         'double': lambda x: data[x].astype(float) if data[x].dtype != float else data[x],
-        'date': lambda x: pd.to_datetime(data[x], format=date_format, errors='raise').astype(object).where(
-            data[x].notnull(), None),
+        # 'date': lambda x: pd.to_datetime(data[x], format=date_format, errors='raise'),
+        'date': lambda x: data[x].astype("category") if data[x].dtype.name != 'category' else data[x],
     }
 
     # adjusting the data
