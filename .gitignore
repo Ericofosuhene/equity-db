@@ -28,6 +28,7 @@ share/python-wheels/
 .idea/
 .DS_Store
 **/.DS_Store
+equity_db/testing/
 MANIFEST
 
 # PyInstaller

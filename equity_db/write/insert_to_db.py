@@ -58,8 +58,8 @@ class InsertIntoDB:
         """
 
         variables = dispatcher(collection)
-        # getting chunks of the lpermno and corresponding data
-        chunks = _chunk_index_dataframe(data_path, cpu_count(), variables.identifier)
+        # getting chunks of the identifier and corresponding chunk ranges
+        chunks = _chunk_index_dataframe(data_path, cpu_count() * 3, variables.identifier)
         ns = _make_namespace(data_path, variables, self.api.db)
 
         start = datetime.now()
@@ -83,6 +83,7 @@ def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> Non
     :param stop: Index to end reading in the chunk
     :return: None
     """
+    # read in the dataframe in the given chunk
     chunked_data = pd.read_csv(ns.data_path, skiprows=range(1, skip - 1), nrows=(stop - skip),
                                dtype=ns.variables.make_dtypes(), header=0)
     chunked_data = prep_data_for_format_and_insert(chunked_data, ns.variables.collection_name, date_format='%Y%m%d')
@@ -113,7 +114,7 @@ def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> Non
         list_of_docs.append(ticker_dict)
 
         # batch inserting documents into the database
-        if len(list_of_docs) == 200:
+        if len(list_of_docs) == 75:
             list_of_docs = _insert_helper(list_of_docs, api, var.collection_name)
 
     # doing last check to ensure there is nothing left over in the documents_to_be_inserted

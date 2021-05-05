@@ -1,8 +1,8 @@
 import pandas as pd
 from typing import List, Optional
 
-from equity_db.api import MongoAPI
-from equity_db.db_access import AssetQuery
+from equity_db.api.mongo_connection import MongoAPI
+from equity_db.query.asset_query import AssetQuery
 
 
 class ReadDB:
