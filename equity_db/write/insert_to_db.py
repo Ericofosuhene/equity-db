@@ -69,7 +69,7 @@ class InsertIntoDB:
         took = (datetime.now() - start).total_seconds()
 
         print('Finished formatting and inserting!')
-        print(f'Took {int(took / 60)} minutes, {took % 60} seconds')
+        print(f'Took {int(took / 60)} minutes, {round(took % 60)} seconds')
 
 
 def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> None:
@@ -100,7 +100,7 @@ def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> Non
         data_tick = chunked_data.loc[asset_id]
 
         # if only one row then the data is likely bad
-        if data_tick.shape[0] == 1:
+        if isinstance(data_tick, pd.Series):
             warnings.warn(f'Hit bad data entry {asset_id}')
             continue  # skip the rest
 
@@ -109,7 +109,7 @@ def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> Non
         ticker_dict = list(static_df.to_dict().values())[0]
         ticker_dict[var.identifier] = asset_id
         ticker_dict['timeseries'] = list(
-            data_tick[partitioned_cols['timeseries']].reset_index().to_dict('index').values())
+            data_tick[partitioned_cols['timeseries']].reset_index(drop=True).to_dict('index').values())
         list_of_docs.append(ticker_dict)
 
         # batch inserting documents into the database
