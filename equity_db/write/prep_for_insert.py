@@ -1,14 +1,45 @@
+import warnings
+
 import pandas as pd
 
-from dask import dataframe as dd
 from typing import List
-
 from tqdm import tqdm
 
+from equity_db.dispatcher import dispatcher
 from equity_db.variables.base_variables import BaseVariables
 
 
-def convert_columns_to_lowercase(data: dd) -> None:
+def prep_data_for_format_and_insert(data: pd.DataFrame, collection: str, date_format: str) -> pd.DataFrame:
+    """
+    formats the given data to be inserted into the mongo database
+    Does:
+        - makes columns names lowercase
+        - ensures columns are valid for the database
+        - adjusts types/pares dates for the dataframe
+        - makes the index the asset identifier
+
+    :param data: the dataframe to be prepped
+    :param collection: the collection the data is meant to be inserted into
+    :param date_format: the format of the dates in the passed data
+    :raise ValueError: if a column of the data is not in the collection metadata
+    :return: dataframe that is ready to be inserted into a mongo database
+    """
+    variable = dispatcher(collection)
+
+    _convert_columns_to_lowercase(data)
+    _ensure_good_columns(data.columns.tolist(), variable)
+    _change_types_for_import(data, variable, date_format)
+
+    # checking to see if the index needs to be reset or not
+    if not isinstance(data.index, pd.RangeIndex):
+        data.reset_index(inplace=True)
+    data.set_index(variable.identifier, inplace=True)
+
+    del variable
+    return data
+
+
+def _convert_columns_to_lowercase(data: pd.DataFrame) -> None:
     """
     Mutates the given DataFrame columns to all be lowecase
     :param data: frame to mutate
@@ -17,7 +48,7 @@ def convert_columns_to_lowercase(data: dd) -> None:
     data.columns = [x.lower() for x in data.columns]
 
 
-def ensure_good_columns(columns: List[str], variable: BaseVariables) -> None:
+def _ensure_good_columns(columns: List[str], variable: BaseVariables) -> None:
     """
     ensures all columns in the given list are in the specified collection
     :param columns: the columns we are checking
@@ -30,7 +61,7 @@ def ensure_good_columns(columns: List[str], variable: BaseVariables) -> None:
         raise ValueError(f'The passed data has columns that are not contained in the collection: {disjoint}')
 
 
-def change_types_for_import(data: dd, variable: BaseVariables, date_format: str) -> dd:
+def _change_types_for_import(data: pd.DataFrame, variable: BaseVariables, date_format: str) -> pd.DataFrame:
     """
     Mutates the dataframe to the correct types for a write to mongo
     timeseries data:
@@ -56,7 +87,7 @@ def change_types_for_import(data: dd, variable: BaseVariables, date_format: str)
             except KeyError:
                 raise ValueError(f'{data_type} data type "{field_type}" is not recognised')
             except ValueError as e:
-                print(f'ERROR on col {col}\n' + str(e))
+                warnings.warn(f'ERROR on col {col}\n' + str(e))
 
     partitioned_cols = variable.get_static_timeseries_intersection(data.columns)
 

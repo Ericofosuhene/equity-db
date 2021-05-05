@@ -1,21 +1,18 @@
 import gc
+import warnings
 
 import pandas as pd
 
 from datetime import datetime
 from functools import partial
 
-from typing import Generator, Tuple
+from typing import Dict, Generator, List, Tuple
 from multiprocessing import Pool, Manager, managers, cpu_count
 
 from equity_db.api.mongo_connection import MongoAPI
 from equity_db.dispatcher import dispatcher
 from equity_db.variables.base_variables import BaseVariables
-from equity_db.write.insert_utils import (
-    change_types_for_import,
-    convert_columns_to_lowercase,
-    ensure_good_columns
-)
+from equity_db.write.prep_for_insert import prep_data_for_format_and_insert
 
 
 class InsertIntoDB:
@@ -38,8 +35,6 @@ class InsertIntoDB:
         Data must be in the format of the output given by ______
         See that function for details on the format and style of the data
 
-        Will Print:
-
         :param data_path: the path to the data to be entered into the mongo database
         :param collection: the collection the data is to be inserted to
             Must have the collection name in the CollectionDispatcher class
@@ -61,10 +56,10 @@ class InsertIntoDB:
             ]
          },
         """
-        print('Starting insert...')
+
         variables = dispatcher(collection)
         # getting chunks of the lpermno and corresponding data
-        chunks = _chunk_index_dataframe(data_path, cpu_count() * 2, variables.identifier)
+        chunks = _chunk_index_dataframe(data_path, cpu_count(), variables.identifier)
         ns = _make_namespace(data_path, variables, self.api.db)
 
         start = datetime.now()
@@ -73,57 +68,59 @@ class InsertIntoDB:
             pool.starmap(func, chunks)
         took = (datetime.now() - start).total_seconds()
 
-        # for x in chunks:
-        #     _parallel_format_insert(ns, *x)
-
         print('Finished formatting and inserting!')
         print(f'Took {int(took / 60)} minutes, {took % 60} seconds')
 
 
-
-
-def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int):
-    df = pd.read_csv(ns.data_path, skiprows=range(1, skip - 1), nrows=(stop - skip), dtype=ns.variables.make_dtypes(),
-                     header=0)
-    df = prep_data_for_format_and_insert(df, ns.variables.collection_name, date_format='%Y%m%d')
-    print(df.head())
-    print(df.tail())
+def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> None:
+    """
+    formats and inserts data into a mongo database, the format is described in format_and_insert.
+    This function is meant to be called in parallel by the multiprocessing module
+    reads in the chunked dataframe, then adjusts types/parses dates,
+    then formats the document and inserts the document in batches
+    :param ns: the Namespace (needs to be made by _make_namespace)
+    :param skip: Index to start reading in the chunk
+    :param stop: Index to end reading in the chunk
+    :return: None
+    """
+    chunked_data = pd.read_csv(ns.data_path, skiprows=range(1, skip - 1), nrows=(stop - skip),
+                               dtype=ns.variables.make_dtypes(), header=0)
+    chunked_data = prep_data_for_format_and_insert(chunked_data, ns.variables.collection_name, date_format='%Y%m%d')
 
     # setting up local variables
     var = ns.variables
-    partitioned_cols = var.get_static_timeseries_intersection(df.columns)
-    ids = df.index.unique()
+    partitioned_cols = var.get_static_timeseries_intersection(chunked_data.columns)
+    ids = chunked_data.index.unique()
     api = MongoAPI(ns.db)
 
+    # formatting and inserting the
     list_of_docs = []
     for asset_id in ids:
         # formatting the document data for a single asset at a time
-        data_tick = df.loc[asset_id]
-        try:
-            static_df = data_tick.iloc[0].to_frame().reindex(partitioned_cols['static'])
-        except AttributeError:
-            print(f'Hit bad data entry {asset_id}')
-            continue
+        data_tick = chunked_data.loc[asset_id]
 
+        # if only one row then the data is likely bad
+        if data_tick.shape[0] == 1:
+            warnings.warn(f'Hit bad data entry {asset_id}')
+            continue  # skip the rest
+
+        # turning tabular data into a document
+        static_df = data_tick.iloc[0].to_frame().reindex(partitioned_cols['static'])
         ticker_dict = list(static_df.to_dict().values())[0]
         ticker_dict[var.identifier] = asset_id
         ticker_dict['timeseries'] = list(
             data_tick[partitioned_cols['timeseries']].reset_index().to_dict('index').values())
         list_of_docs.append(ticker_dict)
 
-        # batch inserting documents into the data base in batches of 100
-        if len(list_of_docs) == 100:
-            api.batch_insert(var.collection_name, list_of_docs)
-            del list_of_docs
-            gc.collect()
-            list_of_docs = []
+        # batch inserting documents into the database
+        if len(list_of_docs) == 200:
+            list_of_docs = _insert_helper(list_of_docs, api, var.collection_name)
 
     # doing last check to ensure there is nothing left over in the documents_to_be_inserted
     if list_of_docs:
-        # batch inserting to the db
-        api.batch_insert(var.collection_name, list_of_docs)
+        _insert_helper(list_of_docs, api, var.collection_name)
 
-    del list_of_docs, df
+    del data_tick
     gc.collect()
 
 
@@ -143,42 +140,9 @@ def _make_namespace(data_path: str, variables: BaseVariables, db_name) -> manage
 
     return ns
 
-def prep_data_for_format_and_insert(data: pd.DataFrame, collection: str, date_format: str) -> pd.DataFrame:
-    """
-    formats the given data to be inserted into the mongo database
-
-    - makes the index the unique identifier column for the collection
-    - Compresses the memory usage by declaring categorical types for static data.
-    - Converts all types out of numpy
-    - Parses dates
-    - Ensures all columns in the given data are valid for the given collection
-    - Converts columns to lowercase
-
-    :param data: the dataframe to be prepped
-    :param collection: the collection the data is meant to be inserted into
-    :param date_format: the format of the dates in the passed data
-    :raise ValueError: if a column of the data is not in the collection metadata
-    :return: dataframe that is ready to be given to format_and_insert
-    """
-    variable = dispatcher(collection)
-
-    convert_columns_to_lowercase(data)
-    ensure_good_columns(data.columns.tolist(), variable)
-    change_types_for_import(data, variable, date_format)
-
-    # checking to see if the index needs to be reset or not
-    # assuming a index name of None means a range index is being used
-    print('Changing index...')
-    if not isinstance(data.index, pd.RangeIndex):
-        data.reset_index(inplace=True)
-    data.set_index(variable.identifier, inplace=True)
-
-    del variable
-    return data
-
 
 def _chunk_index_dataframe(data_path: str, amount_chunks: int, asset_id_col: str) -> Generator[
-    Tuple[int, int], None, None]:
+        Tuple[int, int], None, None]:
     """
     helper to read in a chunked dataframe by its index, and the corresponding dataframe values for said indexes
     the data's primary key must be ordered for this to work, we only read in the primary key for the data
@@ -207,3 +171,17 @@ def _chunk_index_dataframe(data_path: str, amount_chunks: int, asset_id_col: str
     for i in range(0, ranges.shape[0], chunk_len):
         chunk = ranges.iloc[i:i + chunk_len]
         yield chunk['min'].min(), chunk['max'].max()
+
+
+def _insert_helper(list_of_docs: List[Dict], api: MongoAPI, collection_name) -> List:
+    """
+    batch inserts the given documents unto the given collection using the given MongoAPI
+    :param list_of_docs: A list of documents to be inserted
+    :param api: the mongo connection we use to insert
+    :param collection_name: the name of the collection we are inserting to
+    :return: Empty list
+    """
+    api.batch_insert(collection_name, list_of_docs)
+    del list_of_docs
+    gc.collect()
+    return []
