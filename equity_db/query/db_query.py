@@ -1,7 +1,11 @@
+import warnings
+
 import pandas as pd
-from typing import List, Optional
+
+from typing import List
 
 from equity_db.api.mongo_connection import MongoAPI
+from equity_db.dispatcher import dispatcher
 from equity_db.query.asset_query import AssetQuery
 
 
@@ -17,50 +21,53 @@ class ReadDB:
         """
         self.__api = api
 
-    def get_asset_data(self, assets: List[str], ts_fields: Optional[List[str]] = None,
-                       static_fields: Optional[List[str]] = None, start: pd.Timestamp = None,
-                       end: pd.Timestamp = None, search_by: str = 'cusip') -> AssetQuery:
+    def get_asset_data(self, collection: str, assets: List[str], id_field: str, fields: List[str],
+                       start: pd.Timestamp = None, end: pd.Timestamp = None) -> AssetQuery:
         """
         queries the database according to the inputs provided by the user.
         returns a AssetQuery object which the user can use to derive their preferred form of output\
 
+        :param collection: the collection we are searching
         :param assets: the assets to search the database by
-        :param ts_fields: the time series data fields we want to search for in our query
-        :param static_fields: the static data fields we want to include in out query
+        :param fields: the data fields we want to search for in our query
+        :param id_field: the field name of the identifier we passed in "asset"
         :param start: the start time frame for the time series data
         :param end: the end time for the time series data
-        :param search_by: the field name of the identifier we passed in "assets"
         :return: a AssetQuery object holding the query contents
         """
+        variables = dispatcher(collection)
+        partitioned_cols = variables.get_static_timeseries_intersection(fields)
 
-        if (not ts_fields) and (not static_fields):
-            raise ValueError('Either ts_fields or static_fields must be passed')
-
-        if (bool(start) + bool(end) != 2) and ts_fields:
+        # if theres time series cols and not start and ed are passed then throw error
+        if (bool(start) + bool(end) != 2) and partitioned_cols['timeseries']:
             raise ValueError('Both start and end must be specified if querying time series data')
 
-        # this always needs to be made no matter if there is no static wanted
-        static_projection = {field: 1 for field in (static_fields if static_fields else [])}
-        static_projection['_id'] = 0
-        static_projection[search_by] = 1
+        # if theres a start or end passed and olny static data in fields then warn the user
+        if (bool(start) + bool(end) > 0) and (not partitioned_cols['timeseries']):
+            warnings.warn('Date range passed but no timeseries data in the query')
 
-        if ts_fields:
+        # this always needs to be made no matter if there is no static wanted
+        static_projection = {field: 1 for field in (partitioned_cols['static'] if partitioned_cols['static'] else [])}
+        static_projection['_id'] = 0
+        static_projection[id_field] = 1
+
+        if partitioned_cols['timeseries']:
             # making the timeseries projection dict
-            timeseries_projection = {field: '$timeseries.' + field for field in ts_fields}
+            timeseries_projection = {field: '$timeseries.' + field for field in partitioned_cols['timeseries']}
             timeseries_projection['date'] = '$timeseries.datadate'
 
             aggregation_query = [
-                {'$match': {search_by: {'$in': assets}}},
+                {'$match': {id_field: {'$in': assets}}},
                 {'$unwind': "$timeseries"},
                 {'$match': {'timeseries.datadate': {'$gte': start, '$lt': end}}},
                 {'$project': {**static_projection, **timeseries_projection}}
             ]
-            primary_key = ['date', search_by]
+            primary_key = ['date', id_field]
 
         else:
-            aggregation_query = [{'$match': {search_by: {'$in': assets}}},
+            aggregation_query = [{'$match': {id_field: {'$in': assets}}},
                                  {'$project': static_projection}]
-            primary_key = [search_by]
+            primary_key = [id_field]
 
-        query_results = self.__api.read_from_db_agg('compustat', aggregation_query)
+        query_results = self.__api.read_from_db_agg(collection, aggregation_query)
         return AssetQuery(aggregation_query_results=query_results, unique_identifiers=primary_key)

@@ -18,10 +18,8 @@ class AssetQuery:
     This is very helpful when working with jupyter notebooks
 
     Allows the api to not force the client to read query results into memory right away.
-    Also allows for different frame works to be used instead of python like dask
 
-    provides functionality for turning data into data frame.
-    In the future this class can be extended to possibly cache the formatted 2d data if needed
+    provides functionality for turning data into data frame. and cache query results
     """
 
     def __init__(self, aggregation_query_results: Cursor, unique_identifiers: List[str], save: bool = False):
@@ -36,30 +34,6 @@ class AssetQuery:
         self.__unique_identifiers = unique_identifiers
         self.__save = save
         self.__saved_df = None  # holds a copy of the query data in the dataframe if __save is True
-
-    def set_save(self, save: bool = True) -> AssetQuery:
-        """
-        provides the functionality of saving the query and never exhausting the original copy
-        :param save: bool weather or not to save the query so we dont have to keep re scanning the database
-        :return: self, with the save indicator set to true
-        """
-        if not save:
-            del self.__saved_df
-            gc.collect()
-
-        self.__save = save
-        return self
-
-    def make_df_helper(self):
-        """
-        helper to make a dataframe from the mongo cursor
-        :return: Dataframe of the mongo cursor
-        """
-        try:
-            # catch a KeyError from setting indexes on a empty dataframe
-            return pd.DataFrame(self.aggregation_query_results).set_index(self.__unique_identifiers)
-        except KeyError:
-            raise ValueError('The query contents have already been exhausted or the query has returned no results')
 
     @property
     def df(self) -> pd.DataFrame:
@@ -91,3 +65,27 @@ class AssetQuery:
         :return: the identifiers for the query data
         """
         return self.__unique_identifiers
+
+    def set_save(self, save: bool = True) -> AssetQuery:
+        """
+        provides the functionality of saving the query and never exhausting the original copy
+        :param save: bool weather or not to save the query so we dont have to keep re scanning the database
+        :return: self, with the save indicator set to true
+        """
+        if not save:
+            del self.__saved_df
+            gc.collect()
+
+        self.__save = save
+        return self
+
+    def make_df_helper(self):
+        """
+        helper to make a dataframe from the mongo cursor
+        :return: Dataframe of the mongo cursor
+        """
+        try:
+            # catch a KeyError from setting indexes on a empty dataframe
+            return pd.DataFrame(self.aggregation_query_results).set_index(self.__unique_identifiers)
+        except KeyError:
+            raise ValueError('The query contents have already been exhausted or the query has returned no results')
