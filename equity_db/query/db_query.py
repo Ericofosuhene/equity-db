@@ -2,11 +2,12 @@ import warnings
 
 import pandas as pd
 
-from typing import List
+from typing import Dict, List, Set
 
 from equity_db.api.mongo_connection import MongoAPI
 from equity_db.dispatcher import dispatcher
 from equity_db.query.asset_query import AssetQuery
+from equity_db.variables.base_variables import BaseVariables
 
 
 class ReadDB:
@@ -22,7 +23,7 @@ class ReadDB:
         self.__api = api
 
     def get_asset_data(self, collection: str, assets: List[str], id_field: str, fields: List[str],
-                       start: pd.Timestamp = None, end: pd.Timestamp = None) -> AssetQuery:
+                       start: pd.Timestamp = None, end: pd.Timestamp = None, date_col: str = 'datadate') -> AssetQuery:
         """
         queries the database according to the inputs provided by the user.
         returns a AssetQuery object which the user can use to derive their preferred form of output\
@@ -33,10 +34,11 @@ class ReadDB:
         :param id_field: the field name of the identifier we passed in "asset"
         :param start: the start time frame for the time series data
         :param end: the end time for the time series data
+        :param date_col: the date column to use
         :return: a AssetQuery object holding the query contents
         """
-        variables = dispatcher(collection)
-        partitioned_cols = variables.get_static_timeseries_intersection(fields)
+        variables: BaseVariables = dispatcher(collection)
+        partitioned_cols: Dict[str, Set[str]] = variables.get_static_timeseries_intersection(fields)
 
         # if theres time series cols and not start and ed are passed then throw error
         if (bool(start) + bool(end) != 2) and partitioned_cols['timeseries']:
@@ -54,12 +56,12 @@ class ReadDB:
         if partitioned_cols['timeseries']:
             # making the timeseries projection dict
             timeseries_projection = {field: '$timeseries.' + field for field in partitioned_cols['timeseries']}
-            timeseries_projection['date'] = '$timeseries.datadate'
+            timeseries_projection['date'] = f'$timeseries.{date_col}'
 
             aggregation_query = [
                 {'$match': {id_field: {'$in': assets}}},
-                {'$unwind': "$timeseries"},
-                {'$match': {'timeseries.datadate': {'$gte': start, '$lt': end}}},
+                {'$unwind': '$timeseries'},
+                {'$match': {f'timeseries.{date_col}': {'$gte': start, '$lt': end}}},
                 {'$project': {**static_projection, **timeseries_projection}}
             ]
             primary_key = ['date', id_field]
@@ -70,4 +72,4 @@ class ReadDB:
             primary_key = [id_field]
 
         query_results = self.__api.read_from_db_agg(collection, aggregation_query)
-        return AssetQuery(aggregation_query_results=query_results, unique_identifiers=primary_key)
+        return AssetQuery(aggregation_query_results=query_results, unique_identifiers=primary_key, variables=variables)

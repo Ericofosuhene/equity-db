@@ -73,7 +73,7 @@ class BaseVariables(ABC):
         """
         Makes a dictionary of data types for all fields in the dataset
         This is useful when reading in data using pandas, can compress the data to the correct types
-        :return: Dict of column name and the coresponding data tyoe
+        :return: Dict of column name and the corresponding data type
         """
         out = {}
         for col in self.static:
@@ -81,6 +81,30 @@ class BaseVariables(ABC):
             out[col.upper()] = 'category'
         for col in self.timeseries:
             out[col] = float if self.get_type(col) == 'double' else str
+        return out
+
+    def make_dtypes_query(self, names:  Iterable[str]) -> Dict[str, any]:
+        """
+        makes the dtypes for turning a mongo cursor into a dataframe
+        the types are different than make_dtypes because of date handling
+        :return: dict with key, value: {column -> type}
+        """
+        partitioned_cols = self.get_static_timeseries_intersection(names)
+        out = {}
+        # static cols
+        for col in partitioned_cols['static']:
+            out[col] = 'category'
+
+        # time series cols
+        for col in partitioned_cols['timeseries']:
+            col_type = self.get_type(col)
+            if col_type == 'string':
+                out[col] = 'category'
+            elif col_type == 'double':
+                out[col] = 'float64'
+            elif col_type == 'date':
+                out[col] = 'datetime64[ns]'
+
         return out
 
     def is_static(self, name: str) -> bool:

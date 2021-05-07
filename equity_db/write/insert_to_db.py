@@ -114,8 +114,8 @@ def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> Non
         list_of_docs.append(ticker_dict)
 
         # batch inserting documents into the database
-        if len(list_of_docs) == 75:
-            list_of_docs = _insert_helper(list_of_docs, api, var.collection_name)
+        if len(list_of_docs) == 100:
+            _insert_helper(list_of_docs, api, var.collection_name)
 
     # doing last check to ensure there is nothing left over in the documents_to_be_inserted
     if list_of_docs:
@@ -174,15 +174,13 @@ def _chunk_index_dataframe(data_path: str, amount_chunks: int, asset_id_col: str
         yield chunk['min'].min(), chunk['max'].max()
 
 
-def _insert_helper(list_of_docs: List[Dict], api: MongoAPI, collection_name) -> List:
+def _insert_helper(list_of_docs: List[Dict], api: MongoAPI, collection_name) -> None:
     """
     batch inserts the given documents unto the given collection using the given MongoAPI
-    :param list_of_docs: A list of documents to be inserted
+    :param list_of_docs: A list of documents to be inserted, gets cleared once inserted
     :param api: the mongo connection we use to insert
     :param collection_name: the name of the collection we are inserting to
-    :return: Empty list
+    :return: None
     """
     api.batch_insert(collection_name, list_of_docs)
-    del list_of_docs
-    gc.collect()
-    return []
+    list_of_docs.clear()

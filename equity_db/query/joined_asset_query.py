@@ -25,7 +25,7 @@ class JoinedAssetQuery:
         if self.__df is None:
             raise AttributeError("No dataframe has been set!")
 
-        return self.__df
+        return self.__df.copy()
 
     def join(self, onto: AssetQuery, other: AssetQuery, save: bool) -> JoinedAssetQuery:
         """

@@ -1,6 +1,7 @@
 import warnings
 
 import pandas as pd
+import numpy as np
 
 from typing import List
 from tqdm import tqdm
@@ -35,7 +36,6 @@ def prep_data_for_format_and_insert(data: pd.DataFrame, collection: str, date_fo
         data.reset_index(inplace=True)
     data.set_index(variable.identifier, inplace=True)
 
-    del variable
     return data
 
 
@@ -91,18 +91,20 @@ def _change_types_for_import(data: pd.DataFrame, variable: BaseVariables, date_f
 
     partitioned_cols = variable.get_static_timeseries_intersection(data.columns)
 
+    # below are the conversions for data types
+    # theres a bug in pymongo with Nat and pandas so must convert to numpy date type
     static_conversion = {
         'string': lambda x: data[x].astype("category") if data[x].dtype.name != 'category' else data[x],
         'double': lambda x: data[x].astype(str).astype('category') if data[x].dtype.name != 'category' else data[x],
-        # 'date': lambda x: pd.to_datetime(data[x], format=date_format, errors='ignore'),
-        'date': lambda x: data[x].astype("category") if data[x].dtype.name != 'category' else data[x],
+        'date': lambda x: pd.to_datetime(data[x].tolist(), format=date_format).astype(object).to_numpy(
+            dtype=np.datetime64)
     }
 
     timeseries_conversion = {
         'string': lambda x: data[x].astype(str) if data[x].dtype != str else data[x],
         'double': lambda x: data[x].astype(float) if data[x].dtype != float else data[x],
-        # 'date': lambda x: pd.to_datetime(data[x], format=date_format, errors='raise'),
-        'date': lambda x: data[x].astype("category") if data[x].dtype.name != 'category' else data[x],
+        'date': lambda x: pd.to_datetime(data[x].tolist(), format=date_format).astype(object).to_numpy(
+            dtype=np.datetime64)
     }
 
     # adjusting the data
