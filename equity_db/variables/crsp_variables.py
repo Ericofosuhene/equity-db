@@ -10,7 +10,7 @@ class CRSPVariables(BaseVariables, ABC):
 
     def __init__(self):
         """
-        the name of the database is "crsp" the asset identifier is "lpermno"
+        the field of the database is "crsp" the asset identifier is "lpermno"
         """
         super().__init__('crsp', 'lpermno')
 

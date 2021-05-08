@@ -10,7 +10,7 @@ class CompustatVariables(BaseVariables, ABC):
 
     def __init__(self):
         """
-        the name of the database is "compustat" and the asset identifier is the "lpermno"
+        the field of the database is "compustat" and the asset identifier is the "lpermno"
         """
         super().__init__('compustat', 'lpermno')
 

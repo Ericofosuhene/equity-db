@@ -10,7 +10,6 @@ from typing import Dict, Generator, List, Tuple
 from multiprocessing import Pool, Manager, managers, cpu_count
 
 from equity_db.api.mongo_connection import MongoAPI
-from equity_db.dispatcher import dispatcher
 from equity_db.variables.base_variables import BaseVariables
 from equity_db.write.prep_for_insert import prep_data_for_format_and_insert
 
@@ -24,10 +23,11 @@ class InsertIntoDB:
         """
         user is specifying the connection to the mongo database
         :param api: the connection to use for inserting data
+                MUST have specified the collection!
         """
         self.api = api
 
-    def format_and_insert(self, data_path: str, collection: str) -> None:
+    def format_and_insert(self, data_path: str) -> None:
         """
         Formats and inserts the given tabular data to a mongo db collection.
         Will automatically detect if a column is static or time series.
@@ -36,8 +36,6 @@ class InsertIntoDB:
         See that function for details on the format and style of the data
 
         :param data_path: the path to the data to be entered into the mongo database
-        :param collection: the collection the data is to be inserted to
-            Must have the collection name in the CollectionDispatcher class
         :raise ValueError: if the passed data contains columns that are not present in
             the BaseVariables of the collection
         :return: None
@@ -57,7 +55,7 @@ class InsertIntoDB:
          },
         """
 
-        variables = dispatcher(collection)
+        variables = self.api.get_variables(collection=None, raise_error=True)
         # getting chunks of the identifier and corresponding chunk ranges
         chunks = _chunk_index_dataframe(data_path, cpu_count() * 3, variables.identifier)
         ns = _make_namespace(data_path, variables, self.api.db)
@@ -92,7 +90,7 @@ def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> Non
     var = ns.variables
     partitioned_cols = var.get_static_timeseries_intersection(chunked_data.columns)
     ids = chunked_data.index.unique()
-    api = MongoAPI(ns.db)
+    api = MongoAPI(ns.db, var)
 
     # formatting and inserting the
     list_of_docs = []
@@ -115,11 +113,11 @@ def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> Non
 
         # batch inserting documents into the database
         if len(list_of_docs) == 100:
-            _insert_helper(list_of_docs, api, var.collection_name)
+            _insert_helper(list_of_docs, api)
 
     # doing last check to ensure there is nothing left over in the documents_to_be_inserted
     if list_of_docs:
-        _insert_helper(list_of_docs, api, var.collection_name)
+        _insert_helper(list_of_docs, api)
 
     del data_tick
     gc.collect()
@@ -130,7 +128,7 @@ def _make_namespace(data_path: str, variables: BaseVariables, db_name) -> manage
     helper to make the namespace for multiprocessing
     :param data_path: the path to the data we are looking to read in the parallel function
     :param variables: the BaseVariables for the collection we are inserting
-    :param db_name: the name of the database we are inserting into
+    :param db_name: the field of the database we are inserting into
     :return: namespace for multiprocessing
     """
     # setting up the namespace
@@ -174,13 +172,12 @@ def _chunk_index_dataframe(data_path: str, amount_chunks: int, asset_id_col: str
         yield chunk['min'].min(), chunk['max'].max()
 
 
-def _insert_helper(list_of_docs: List[Dict], api: MongoAPI, collection_name) -> None:
+def _insert_helper(list_of_docs: List[Dict], api: MongoAPI) -> None:
     """
     batch inserts the given documents unto the given collection using the given MongoAPI
     :param list_of_docs: A list of documents to be inserted, gets cleared once inserted
     :param api: the mongo connection we use to insert
-    :param collection_name: the name of the collection we are inserting to
     :return: None
     """
-    api.batch_insert(collection_name, list_of_docs)
+    api.batch_insert(list_of_docs)
     list_of_docs.clear()

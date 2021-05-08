@@ -1,4 +1,4 @@
-static,type,description,name
+static,type,description,field
 TRUE,string,Standard and Poor's Identifier (GVKEY),gvkey
 TRUE,string,Security-level Identifier (LIID),liid
 TRUE,date,First Effective Date of Link (LINKDT),linkdt

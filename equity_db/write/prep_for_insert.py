@@ -3,7 +3,6 @@ import warnings
 import pandas as pd
 import numpy as np
 
-from typing import List
 from tqdm import tqdm
 
 from equity_db.dispatcher import dispatcher
@@ -28,7 +27,7 @@ def prep_data_for_format_and_insert(data: pd.DataFrame, collection: str, date_fo
     variable = dispatcher(collection)
 
     _convert_columns_to_lowercase(data)
-    _ensure_good_columns(data.columns.tolist(), variable)
+    variable.ensures_valid_fields(data.columns)
     _change_types_for_import(data, variable, date_format)
 
     # checking to see if the index needs to be reset or not
@@ -46,19 +45,6 @@ def _convert_columns_to_lowercase(data: pd.DataFrame) -> None:
     :return: None
     """
     data.columns = [x.lower() for x in data.columns]
-
-
-def _ensure_good_columns(columns: List[str], variable: BaseVariables) -> None:
-    """
-    ensures all columns in the given list are in the specified collection
-    :param columns: the columns we are checking
-    :param variable: the base variables for the corresponding collection
-    :raise ValueError: if a bad column is found
-    :return: None
-    """
-    disjoint = set(columns).difference(set(variable.get_names()))
-    if disjoint:
-        raise ValueError(f'The passed data has columns that are not contained in the collection: {disjoint}')
 
 
 def _change_types_for_import(data: pd.DataFrame, variable: BaseVariables, date_format: str) -> pd.DataFrame:
@@ -87,7 +73,8 @@ def _change_types_for_import(data: pd.DataFrame, variable: BaseVariables, date_f
             except KeyError:
                 raise ValueError(f'{data_type} data type "{field_type}" is not recognised')
             except ValueError as e:
-                warnings.warn(f'ERROR on col {col}\n' + str(e))
+                warnings.warn(f'ERROR on col {col}\n')
+                print(e)
 
     partitioned_cols = variable.get_static_timeseries_intersection(data.columns)
 
