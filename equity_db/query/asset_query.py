@@ -3,6 +3,7 @@ from __future__ import annotations
 import gc
 
 import pandas as pd
+import pandas_market_calendars as mcal
 
 from typing import List, Optional
 from pymongo.cursor import Cursor
@@ -13,15 +14,12 @@ from equity_db.variables.base_variables import BaseVariables
 class AssetQuery:
     """
     Handles and formats mongo queries for the client.
-    Client interacts with this object
 
-    Allows client the option to save the search results
-    therefore not having to rerun queries all the time
-    This is very helpful when working with jupyter notebooks
+    Allows client the option to save the search results, therefore not having to rerun queries all the time
+    Allows for calendar references, user can specify a market calendar and our query will be
+    reindexed for that market calendar
 
     Allows the api to not force the client to read query results into memory right away.
-
-    provides functionality for turning data into data frame. and cache query results
     """
 
     def __init__(self, aggregation_query_results: Cursor, unique_identifiers: List[str],
@@ -36,9 +34,10 @@ class AssetQuery:
         """
         self.__aggregation_query_results = aggregation_query_results
         self.__unique_identifiers = unique_identifiers
-        self.__variables = variables
-        self.__save = save
-        self.__saved_df = None  # holds a copy of the query data in the dataframe if __save is True
+        self.__variables: BaseVariables = variables
+        self.__save: bool = save
+        self.__saved_df: Optional[pd.DataFrame] = None  # holds a copy of the query in the dataframe if __save is True
+        self.__calender: Optional[str] = None  # holds the calendar name we wish to filter by, default is no calendar
 
     @property
     def df(self) -> pd.DataFrame:
@@ -50,10 +49,10 @@ class AssetQuery:
         """
         if self.__save:
             if self.__saved_df is None:
-                self.__saved_df = self.make_df_helper()
+                self.__saved_df = self.__calender_adjustment(self.__make_df_helper())
             return self.__saved_df.copy()
 
-        return self.make_df_helper()
+        return self.__calender_adjustment(self.__make_df_helper())
 
     @property
     def aggregation_query_results(self) -> Cursor:
@@ -84,7 +83,23 @@ class AssetQuery:
         self.__save = save
         return self
 
-    def make_df_helper(self):
+    def set_calendar(self, calender: str) -> AssetQuery:
+        """
+        sets the desired calendar we wish to filter query results by
+        :param calender: the name of the calender we wish to filter by
+                Can be: "365" -> every day in a year
+                        anything in mcal.get_calendar_names()
+        :return: self
+        """
+        valid_cal: List[str] = ['365'] + mcal.get_calendar_names()
+        if calender in valid_cal:
+            self.__calender = calender
+        else:
+            raise ValueError(f'Calender name {calender} is not valid! \nValid Calenders are: {valid_cal}')
+
+        return self
+
+    def __make_df_helper(self):
         """
         helper to make a dataframe from the mongo cursor
         :return: Dataframe of the mongo cursor
@@ -92,9 +107,46 @@ class AssetQuery:
         try:
             # catch a KeyError from setting indexes on a empty dataframe
             query_df = pd.DataFrame(self.aggregation_query_results)
-            return query_df.astype(self.__variables.make_dtypes_query(query_df.columns))\
+            return query_df.astype(self.__variables.make_dtypes_query(query_df.columns)) \
                 .set_index(self.__unique_identifiers)
 
-        except KeyError as e:
-            print(e)
+        except KeyError:
             raise ValueError('The query contents have already been exhausted or the query has returned no results')
+
+    def __calender_adjustment(self, query_df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Reindexs the given dataframe to the schedule specified by the user in set_schedule
+        if set_schedule was never called then there will be no reindexing done
+        :param query_df: the df we are reindexing
+        :return:dataframe with the correct dates for the provided schedule
+        """
+        # no adjustment wanted
+        if self.__calender is None:
+            return query_df
+
+        # must do some input checks to ensure we have a valid dataframe to join a calender onto
+        # ensuring we have a MultiIndex
+        if len(self.__unique_identifiers) != 2:
+            raise ValueError('Must have a MultiIndex of length two to preform calendar adjustments')
+        # ensuring we have a date field in the MultiIndex
+        if 'date' not in self.__unique_identifiers:
+            raise ValueError('Can not do calender adjustments if there is no level named "date" in the MultiIndex')
+
+        calender: pd.DatetimeIndex = self.__fetch_calender(query_df.index.get_level_values('date').min(),
+                                                           query_df.index.get_level_values('date').max())
+
+        level_to_unstack = self.__unique_identifiers[1] if self.__unique_identifiers.index('date') == 0 else \
+            self.__unique_identifiers[0]
+        return query_df.unstack(level_to_unstack).reindex(calender.values).stack(dropna=False)
+
+    def __fetch_calender(self, start_date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DatetimeIndex:
+        """
+        fetches the correct calendar for whats specified in self.__calender
+        :param start_date: the start date for the calender
+        :param end_date: the end date for the calender
+        :return: a pandas DatetimeIndex of the desired calendar
+        """
+        if self.__calender == '365':
+            return pd.date_range(start=start_date, end=end_date, freq='D')
+
+        return mcal.get_calendar(self.__calender).valid_days(start_date=start_date, end_date=end_date)

@@ -79,7 +79,7 @@ def _change_types_for_import(data: pd.DataFrame, variable: BaseVariables, date_f
     partitioned_cols = variable.get_static_timeseries_intersection(data.columns)
 
     # below are the conversions for data types
-    # theres a bug in pymongo with Nat and pandas so must convert to numpy date type
+    # theres a bug in pymongo with Nat and pandas so must convert to numpy date type, reason for weird castings
     static_conversion = {
         'string': lambda x: data[x].astype("category") if data[x].dtype.name != 'category' else data[x],
         'double': lambda x: data[x].astype(str).astype('category') if data[x].dtype.name != 'category' else data[x],
