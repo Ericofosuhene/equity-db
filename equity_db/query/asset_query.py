@@ -132,20 +132,21 @@ class AssetQuery:
         if 'date' not in self.__unique_identifiers:
             raise ValueError('Can not do calender adjustments if there is no level named "date" in the MultiIndex')
 
-        calender: pd.DatetimeIndex = self.__fetch_calender(query_df.index.get_level_values('date').min(),
-                                                           query_df.index.get_level_values('date').max())
+        calender: pd.DatetimeIndex = self.__fetch_calender(query_df)
 
         level_to_unstack = self.__unique_identifiers[1] if self.__unique_identifiers.index('date') == 0 else \
             self.__unique_identifiers[0]
         return query_df.unstack(level_to_unstack).reindex(calender.values).stack(dropna=False)
 
-    def __fetch_calender(self, start_date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DatetimeIndex:
+    def __fetch_calender(self, query_df: pd.Dataframe) -> pd.DatetimeIndex:
         """
         fetches the correct calendar for whats specified in self.__calender
-        :param start_date: the start date for the calender
-        :param end_date: the end date for the calender
+        :param query_df: the df we are getting the calender for
         :return: a pandas DatetimeIndex of the desired calendar
         """
+        start_date = query_df.index.get_level_values('date').min()
+        end_date = query_df.index.get_level_values('date').max()
+
         if self.__calender == '365':
             return pd.date_range(start=start_date, end=end_date, freq='D')
 
