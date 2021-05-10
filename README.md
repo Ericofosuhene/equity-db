@@ -15,8 +15,6 @@ collections to the database.
   weburl: "www.apple.com"
   spcseccd: "940"
   fic: "USA"
-  naics: "334220"
-  sic: "3663"
   add1: "One Apple Park Way"
   linkenddt: "E"
   phone: "408-996-1010"
@@ -25,7 +23,6 @@ collections to the database.
   gvkey: "001690"
   gsector: "45"
   cusip: "037833100"
-  incorp: "CA"
   loc: "USA"
   liid: "01"
   linkdt: 1980-12-12T00
@@ -56,7 +53,6 @@ collections to the database.
       trfd: 1
     },
   ],
-  ....
 }
 ```
 
