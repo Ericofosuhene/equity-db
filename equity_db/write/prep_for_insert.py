@@ -3,8 +3,6 @@ import warnings
 import pandas as pd
 import numpy as np
 
-from tqdm import tqdm
-
 from equity_db.dispatcher import dispatcher
 from equity_db.variables.base_variables import BaseVariables
 
@@ -65,7 +63,7 @@ def _change_types_for_import(data: pd.DataFrame, variable: BaseVariables, date_f
     def adjustor_helper(adjustment_dict, data_type: str):
         print(f'Adjusting {data_type} data...')
 
-        for col in tqdm(partitioned_cols[data_type]):
+        for col in partitioned_cols[data_type]:
             field_type = variable.get_type(col)
 
             try:
