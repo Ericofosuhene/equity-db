@@ -1,22 +1,24 @@
 from distutils.core import setup
 
+from setuptools import find_packages
+
 setup(
     name='equity_db',
-    packages=['equity_db'],
-    version='0.2',
+    version='1.2',
+    packages=find_packages(),
+    package_data={'': ['variables/metadata/*.csv']},
     license='MIT',
     description='Python package which manages CRSP & Compustat data. Uses MongoDB to store and query data.',
     author='Alex DiCarlo',
     author_email='dicarlo.a@northeastern.edu',
     url='https://github.com/Alexd14/equity-db',
-    download_url='https://github.com/Alexd14/equity-db/archive/refs/tags/v0.2.tar.gz',
+    download_url='https://github.com/Alexd14/equity-db/archive/refs/tags/v1.1.tar.gz',
     keywords=['CRSP', 'Compustat', 'stock database'],
     install_requires=[
         'pandas',
         'numpy',
         'pymongo',
         'pandas_market_calendars',
-        'tqdm',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
