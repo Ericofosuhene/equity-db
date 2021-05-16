@@ -9,9 +9,9 @@ from functools import partial
 from typing import Dict, Generator, List, Tuple
 from multiprocessing import Pool, Manager, managers, cpu_count
 
+from .prep_for_insert import prep_data_for_format_and_insert
 from ..api.mongo_connection import MongoAPI
 from ..variables.base_variables import BaseVariables
-from ..write.prep_for_insert import prep_data_for_format_and_insert
 
 
 class InsertIntoDB:
@@ -84,7 +84,7 @@ def _parallel_format_insert(ns: managers.Namespace, skip: int, stop: int) -> Non
     # read in the dataframe in the given chunk
     chunked_data = pd.read_csv(ns.data_path, skiprows=range(1, skip - 1), nrows=(stop - skip),
                                dtype=ns.variables.make_dtypes(), header=0)
-    chunked_data = prep_data_for_format_and_insert(chunked_data, ns.variables.collection_name, date_format='%Y%m%d')
+    chunked_data = prep_data_for_format_and_insert(chunked_data, ns.variables, date_format='%Y%m%d')
 
     # setting up local variables
     var = ns.variables

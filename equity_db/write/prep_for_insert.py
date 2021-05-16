@@ -3,11 +3,10 @@ import warnings
 import pandas as pd
 import numpy as np
 
-from equity_db.dispatcher import dispatcher
 from ..variables.base_variables import BaseVariables
 
 
-def prep_data_for_format_and_insert(data: pd.DataFrame, collection: str, date_format: str) -> pd.DataFrame:
+def prep_data_for_format_and_insert(data: pd.DataFrame, collection: BaseVariables, date_format: str) -> pd.DataFrame:
     """
     formats the given data to be inserted into the mongo database
     Does:
@@ -22,16 +21,15 @@ def prep_data_for_format_and_insert(data: pd.DataFrame, collection: str, date_fo
     :raise ValueError: if a column of the data is not in the collection metadata
     :return: dataframe that is ready to be inserted into a mongo database
     """
-    variable = dispatcher(collection)
 
     _convert_columns_to_lowercase(data)
-    variable.ensures_valid_fields(data.columns)
-    _change_types_for_import(data, variable, date_format)
+    collection.ensures_valid_fields(data.columns)
+    _change_types_for_import(data, collection, date_format)
 
     # checking to see if the index needs to be reset or not
     if not isinstance(data.index, pd.RangeIndex):
         data.reset_index(inplace=True)
-    data.set_index(variable.identifier, inplace=True)
+    data.set_index(collection.identifier, inplace=True)
 
     return data
 
