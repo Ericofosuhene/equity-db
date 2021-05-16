@@ -4,9 +4,9 @@ from pymongo import MongoClient
 from pymongo.cursor import Cursor
 from pymongo.errors import ServerSelectionTimeoutError
 
-from equity_db.api.mongo_status import open_mongo
 from equity_db.dispatcher import dispatcher
-from equity_db.variables.base_variables import BaseVariables
+from .mongo_status import open_mongo
+from ..variables.base_variables import BaseVariables
 
 
 class MongoAPI:

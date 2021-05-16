@@ -1,6 +1,6 @@
 from abc import ABC
 
-from equity_db.variables.base_variables import BaseVariables
+from .base_variables import BaseVariables
 
 
 class CRSPVariables(BaseVariables, ABC):

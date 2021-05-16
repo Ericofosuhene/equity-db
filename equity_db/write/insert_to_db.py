@@ -9,9 +9,9 @@ from functools import partial
 from typing import Dict, Generator, List, Tuple
 from multiprocessing import Pool, Manager, managers, cpu_count
 
-from equity_db.api.mongo_connection import MongoAPI
-from equity_db.variables.base_variables import BaseVariables
-from equity_db.write.prep_for_insert import prep_data_for_format_and_insert
+from ..api.mongo_connection import MongoAPI
+from ..variables.base_variables import BaseVariables
+from ..write.prep_for_insert import prep_data_for_format_and_insert
 
 
 class InsertIntoDB:
@@ -141,7 +141,7 @@ def _make_namespace(data_path: str, variables: BaseVariables, db_name) -> manage
 
 
 def _chunk_index_dataframe(data_path: str, amount_chunks: int, asset_id_col: str) -> Generator[
-        Tuple[int, int], None, None]:
+    Tuple[int, int], None, None]:
     """
     helper to read in a chunked dataframe by its index, and the corresponding dataframe values for said indexes
     the data's primary key must be ordered for this to work, we only read in the primary key for the data

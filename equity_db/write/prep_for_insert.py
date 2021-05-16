@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 from equity_db.dispatcher import dispatcher
-from equity_db.variables.base_variables import BaseVariables
+from ..variables.base_variables import BaseVariables
 
 
 def prep_data_for_format_and_insert(data: pd.DataFrame, collection: str, date_format: str) -> pd.DataFrame:

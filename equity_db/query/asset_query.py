@@ -8,7 +8,7 @@ import pandas_market_calendars as mcal
 from typing import List, Optional
 from pymongo.cursor import Cursor
 
-from equity_db.variables.base_variables import BaseVariables
+from ..variables.base_variables import BaseVariables
 
 
 class AssetQuery:

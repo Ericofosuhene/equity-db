@@ -4,9 +4,9 @@ import pandas as pd
 
 from typing import Dict, List, Optional, Set, Tuple, Union
 
-from equity_db.api.mongo_connection import MongoAPI
-from equity_db.query.asset_query import AssetQuery
-from equity_db.variables.base_variables import BaseVariables
+from ..api.mongo_connection import MongoAPI
+from ..query.asset_query import AssetQuery
+from ..variables.base_variables import BaseVariables
 
 
 class ReadDB:
@@ -62,7 +62,7 @@ class ReadDB:
 
 def _make_aggregation_query(assets: List[str], search_by: str, partitioned_cols: Dict[str, Set[str]], date_col: str,
                             start: pd.Timestamp = None, end: pd.Timestamp = None) -> Tuple[
-                            List[Dict[str, any]], List[str]]:
+    List[Dict[str, any]], List[str]]:
     """
     constructs a MQL query searching "assets" for "feilds" optionally over time period "start" to "end"
     :param assets: the assets to search the database by
