@@ -4,8 +4,8 @@ from pymongo import MongoClient
 from pymongo.cursor import Cursor
 from pymongo.errors import ServerSelectionTimeoutError
 
-from equity_db.dispatcher import dispatcher
 from .mongo_status import open_mongo
+from ..dispatcher import dispatcher
 from ..variables.base_variables import BaseVariables
 
 
